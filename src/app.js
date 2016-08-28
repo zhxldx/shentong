@@ -8,7 +8,7 @@ var router = new Router({
 router.map({
 	'/':{			
         component: function(resolve){
-            require(['./views/Demo'],resolve);
+            require(['./views/Index'],resolve);
         }
     }
 });

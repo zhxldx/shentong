@@ -1,4 +1,33 @@
-@body_w: 10rem;
+/*页面宽度*/
+@body-w: 10rem;
+/*字体大小*/
+@fs-36: .48rem; // 36px
+@fs-32: .00426667rem; // .32px
+@fs-30: .004rem; // .30px
+@fs-28: .37333333rem; // 28px
+@fs-26: .34666667rem; // 26px
+@fs-22: .29333333rem; // 22px
+/*颜色*/
+@c-999999: #999999;
+@c-cccccc: #cccccc;
+@c-666666: #666666;
+@c-e0e0e0: #e0e0e0;
+@c-333333: #333333;
+@c-f26b00: #f26b00;
+@c-f8f8f8: #f8f8f8;
+@c-d8d8d8: #d8d8d8;
+/*层级*/
+@zx10: 10;//页面级
+@zx20: 20;//页面级较高
+@zx100: 100;//组件级
+@zx200: 200;//组件级较高
+@zx500: 500;//弹出层
+@zx999: 999;//最高
+
 .translate(@x, @y){
     transform: translate(@x, @y);
+}
+.background(@url){
+    background: url(@url) no-repeat;
+    background-size: 100% 100%;
 }
