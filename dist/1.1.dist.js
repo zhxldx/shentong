@@ -380,7 +380,7 @@ webpackJsonp([1],[
 
 
 	// module
-	exports.push([module.id, "/*页面宽度*/\n/*字体大小*/\n/*颜色*/\n/*层级*/\nfooter {\n  width: 10rem;\n  height: 1.31rem /* 98px */;\n  border-top: solid 1px #d8d8d8;\n  position: fixed;\n  bottom: 0;\n  z-index: 100;\n}\nfooter ul {\n  width: 8.14rem /* 70px */;\n  margin: 0 auto;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\nfooter li {\n  height: 1.31rem /* 98px */;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-flow: column;\n      -ms-flex-flow: column;\n          flex-flow: column;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\nfooter li.active a {\n  color: #f26b00;\n}\nfooter li:first-of-type i {\n  background: url(" + __webpack_require__(13) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:first-of-type.active i {\n  background: url(" + __webpack_require__(14) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(2) i {\n  background: url(" + __webpack_require__(15) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(2).active i {\n  background: url(" + __webpack_require__(16) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(3) i {\n  background: url(" + __webpack_require__(17) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(3).active i {\n  background: url(" + __webpack_require__(18) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:last-of-type i {\n  background: url(" + __webpack_require__(19) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:last-of-type.active i {\n  background: url(" + __webpack_require__(20) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter a {\n  text-align: center;\n  font-size: 0.29rem;\n  color: #999999;\n  line-height: 0.29rem;\n}\nfooter i {\n  display: block;\n  width: 0.67rem /* 50px */;\n  height: 0.67rem /* 50px */;\n  margin-bottom: 0.12rem /* 9px */;\n}\n", ""]);
+	exports.push([module.id, "/*页面宽度*/\n/*字体大小*/\n/*颜色*/\n/*层级*/\nfooter {\n  width: 10rem;\n  height: 1.30666667rem /* 98px */;\n  border-top: solid 1px #d8d8d8;\n  position: fixed;\n  bottom: 0;\n  z-index: 100;\n}\nfooter ul {\n  width: 8.13333334rem /* 70px */;\n  margin: 0 auto;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\nfooter li {\n  height: 1.30666667rem /* 98px */;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-flow: column;\n      -ms-flex-flow: column;\n          flex-flow: column;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\nfooter li.active a {\n  color: #f26b00;\n}\nfooter li:first-of-type i {\n  background: url(" + __webpack_require__(13) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:first-of-type.active i {\n  background: url(" + __webpack_require__(14) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(2) i {\n  background: url(" + __webpack_require__(15) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(2).active i {\n  background: url(" + __webpack_require__(16) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(3) i {\n  background: url(" + __webpack_require__(17) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:nth-of-type(3).active i {\n  background: url(" + __webpack_require__(18) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:last-of-type i {\n  background: url(" + __webpack_require__(19) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter li:last-of-type.active i {\n  background: url(" + __webpack_require__(20) + ") no-repeat;\n  background-size: 100% 100%;\n}\nfooter a {\n  text-align: center;\n  font-size: 0.38666667rem;\n  color: #999999;\n  line-height: 0.38666667rem;\n}\nfooter i {\n  display: block;\n  width: 0.66666667rem /* 50px */;\n  height: 0.66666667rem /* 50px */;\n  margin-bottom: 0.12rem /* 9px */;\n}\n", ""]);
 
 	// exports
 
@@ -446,19 +446,7 @@ webpackJsonp([1],[
 	    props: ['active'],
 	    data: function data() {
 	        return {
-	            list: [{
-	                title: '首页',
-	                url: ''
-	            }, {
-	                title: '商城',
-	                url: ''
-	            }, {
-	                title: '消息',
-	                url: ''
-	            }, {
-	                title: '我的',
-	                url: ''
-	            }]
+	            list: [{ title: '首页', url: '' }, { title: '商城', url: '' }, { title: '消息', url: '' }, { title: '我的', url: '' }]
 	        };
 	    }
 	};

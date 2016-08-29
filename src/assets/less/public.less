@@ -2,11 +2,11 @@
 @body-w: 10rem;
 /*字体大小*/
 @fs-36: .48rem; // 36px
-@fs-32: .43rem; // 32px
+@fs-32: .42666667rem; // 32px
 @fs-30: .4rem; // 30px
-@fs-28: .37rem; // 28px
-@fs-26: .35rem; // 26px
-@fs-22: .29rem; // 22px
+@fs-28: .37333333rem; // 28px
+@fs-26: .34666667rem; // 26px
+@fs-22: .38666667rem; // 29px
 /*颜色*/
 @c-999999: #999999;
 @c-cccccc: #cccccc;
@@ -28,6 +28,16 @@
     transform: translate(@x, @y);
 }
 .background(@url){
-    background: url(@url) no-repeat;
+    @base: '../../assets/img/';
+    background: url('@{base}@{url}') no-repeat;
     background-size: 100% 100%;
+}
+.px-dpr(@name, @px){
+    @{name}: @px / 2;
+    [data-dpr="2"] & {
+        @{name}: @px;
+    }
+    [data-dpr="3"] & {
+        @{name}: @px / 2 * 3;
+    }
 }
