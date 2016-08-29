@@ -72,7 +72,7 @@
     }
 
     function refreshRem(){
-        var width = docEl.getBoundingClientRect().width;
+        var width = docEl.getBoundingClientRect().width || window.innerWidth;
         var height = docEl.clientHeight;
         width = width > height ? height : width;
         // if (width / dpr > 540) {

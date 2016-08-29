@@ -514,8 +514,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./public.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./public.css");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./base.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./base.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -533,7 +533,7 @@
 
 
 	// module
-	exports.push([module.id, "body{\n    width: 10rem;\n    margin: 0 auto;\n}\n#app{\n    width: 10rem;\n    position: relative;\n    overflow-x: hidden;\n}", ""]);
+	exports.push([module.id, "/*页面宽度*/\n/*字体大小*/\n/*颜色*/\n/*层级*/\nhtml {\n  height: 100%;\n}\nbody {\n  width: 10rem;\n  height: 100%;\n  margin: 0 auto;\n  background-color: #f8f8f8;\n}\n#app {\n  width: 10rem;\n  position: relative;\n  overflow-x: hidden;\n}\n", ""]);
 
 	// exports
 

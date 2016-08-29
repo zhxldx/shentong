@@ -4,7 +4,7 @@ var autoprefixer = require('autoprefixer');
 module.exports = {
     entry: {
         app : './src/app.js',
-        common: ['vue','vue-router','./src/assets/css/neat.min.css','./src/assets/css/public.css']
+        common: ['vue','vue-router','./src/assets/css/neat.min.css','./src/assets/less/base.less']
     },
     output: {
         path: './dist/',
