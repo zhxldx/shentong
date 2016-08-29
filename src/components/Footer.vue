@@ -25,7 +25,7 @@
 <style lang="less">
     @import '../assets/less/public.less';
     footer {
-        @f-h: 1.32rem/* 99px */;
+        @f-h: 1.32rem; // 99px
         height: @f-h;
         border-top: solid 1px @c-d8d8d8;
         position: fixed;
@@ -38,7 +38,7 @@
         }
         li {
             flex: 1;
-            height: 1.30666667rem/* 98px */;
+            height: @f-h - .01333333rem; // 1px
             display: flex;
             justify-content: center;
             align-items: center;
@@ -73,12 +73,12 @@
             line-height: @fs-22;
             &:before {
                 content: "";
-                @wh: .66666667rem/* 50px */;
+                @wh: .66666667rem; // 50px
                 display: block;
                 width: @wh;
                 height: @wh;
                 margin: 0 auto;
-                margin-bottom: .12rem/* 9px */;
+                margin-bottom: .12rem; // 9px
             }
         }
     }
