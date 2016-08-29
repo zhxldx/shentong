@@ -533,7 +533,7 @@
 
 
 	// module
-	exports.push([module.id, "/*页面宽度*/\n/*字体大小*/\n/*颜色*/\n/*层级*/\nhtml {\n  height: 100%;\n}\nbody {\n  width: 10rem;\n  height: 100%;\n  margin: 0 auto;\n  background-color: #f8f8f8;\n}\n#app {\n  width: 10rem;\n  position: relative;\n  overflow-x: hidden;\n}\n", ""]);
+	exports.push([module.id, "/*页面宽度*/\n/*字体大小*/\n/*颜色*/\n/*层级*/\nhtml {\n  height: 100%;\n}\nbody {\n  width: 10rem;\n  height: 100%;\n  margin: 0 auto;\n  background-color: #f8f8f8;\n}\n#app {\n  width: 10rem;\n  position: relative;\n  overflow-x: hidden;\n}\n.fl {\n  float: left;\n}\n.fr {\n  float: right;\n}\n.clearfix:after {\n  content: \"\";\n  display: block;\n  clear: both;\n  visibility: hidden;\n  height: 0;\n}\n.clearfix {\n  zoom: 1;\n}\n", ""]);
 
 	// exports
 

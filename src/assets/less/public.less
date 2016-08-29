@@ -2,6 +2,7 @@
 @body-w: 10rem;
 @footer-h: 1.32rem; // 99px
 /*字体大小*/
+@fs-54: .72rem; // 54px
 @fs-36: .48rem; // 36px
 @fs-32: .42666667rem; // 32px
 @fs-30: .4rem; // 30px
@@ -26,15 +27,19 @@
 @zx500: 500;//弹出层
 @zx999: 999;//最高
 
-.translate(@x, @y){
+.translate(@x, @y) {
     transform: translate(@x, @y);
 }
-.background(@url){
+.background(@url) {
     @base: '../../assets/img/';
     background: url('@{base}@{url}') no-repeat;
     background-size: 100% 100%;
 }
-.px-dpr(@name, @px){
+.font-size(@fs) {
+    font-size: @fs;
+    line-height: @fs;
+}
+.px-dpr(@name, @px) {
     @{name}: @px / 2;
     [data-dpr="2"] & {
         @{name}: @px;

@@ -1,6 +1,7 @@
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
+var path = require('path');
 module.exports = {
     entry: {
         app : './src/app.js',
@@ -34,7 +35,8 @@ module.exports = {
         extensions: ['', '.js', '.less','.vue'],
         alias: {
             vue: 'vue/dist/vue.min.js',
-            'vue-router': 'vue-router/dist/vue-router.min.js'
+            'vue-router': 'vue-router/dist/vue-router.min.js',
+            components: path.resolve(__dirname, './src/components')
         }
     },
     plugins: [

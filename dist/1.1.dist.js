@@ -12,7 +12,7 @@ webpackJsonp([1],[
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/Index.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/views/Index/Index.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(23)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -23,7 +23,7 @@ webpackJsonp([1],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhoulang/work/work-me/shentong/src/views/Index.vue"
+	  var id = "/Users/zhoulang/work/work-me/shentong/src/views/Index/Index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -47,8 +47,8 @@ webpackJsonp([1],[
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/less-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Index.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/less-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Index.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Index.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -308,11 +308,16 @@ webpackJsonp([1],[
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
+	var _Head = __webpack_require__(29);
+
+	var _Head2 = _interopRequireDefault(_Head);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	    components: {
-	        vFooter: _Footer2.default
+	        vFooter: _Footer2.default,
+	        vHead: _Head2.default
 	    }
 	};
 
@@ -461,7 +466,99 @@ webpackJsonp([1],[
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"index-box\">\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n    <div>sdfs</div>\n</div>\n<v-footer :active=\"1\"></v-footer>\n";
+	module.exports = "\n<div class=\"index-box\">\n    <v-head></v-head>\n</div>\n<v-footer :active=\"1\"></v-footer>\n";
+
+/***/ },
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(30)
+	__vue_script__ = __webpack_require__(33)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/views/Index/Head.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(34)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/zhoulang/work/work-me/shentong/src/views/Index/Head.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(31);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Head.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Head.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/*页面宽度*/\n/*字体大小*/\n/*颜色*/\n/*层级*/\n.index-head {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  height: 4.53333333rem;\n  background: url(" + __webpack_require__(32) + ") no-repeat;\n  background-size: 100% 100%;\n}\n.left-item {\n  margin-left: .4rem;\n}\n.left-item span {\n  display: block;\n  color: #fff;\n  letter-spacing: 1px;\n}\n.coupon {\n  margin-top: .73333333rem;\n}\n.left-item-word {\n  font-size: 0.42666667rem;\n  line-height: 0.42666667rem;\n}\n.left-item-number {\n  font-size: 0.72rem;\n  line-height: 0.72rem;\n  margin-top: .10666667rem;\n  letter-spacing: 2px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "img/93f3c12e_shouye_bg@3x.png";
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"index-head\">\n    <div class=\"left-item\">\n        <div class=\"integral\">\n            <span class=\"left-item-word\">我的积分</span>\n            <span class=\"left-item-number\">20000</span>\n        </div>\n        <div class=\"coupon\">\n            <span class=\"left-item-word\">我的点券</span>\n            <span class=\"left-item-number\">20000</span>\n        </div>\n    </div>\n    <div class=\"right-item\">\n        \n    </div>\n</div>\n";
 
 /***/ }
 ]);
