@@ -25,19 +25,20 @@
 <style lang="less">
     @import '../assets/less/public.less';
     footer {
-        @f-h: 1.30666667rem/* 98px */;
+        @f-h: 1.32rem/* 99px */;
         height: @f-h;
         border-top: solid 1px @c-d8d8d8;
         position: fixed;
         bottom: 0;
         z-index: @zx100;
+        box-sizing: border-box;
         ul {
             width: @body-w;
             display: flex;
         }
         li {
             flex: 1;
-            height: @f-h;
+            height: 1.30666667rem/* 98px */;
             display: flex;
             justify-content: center;
             align-items: center;
