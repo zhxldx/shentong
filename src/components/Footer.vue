@@ -35,14 +35,6 @@
             width: @body-w;
             display: flex;
         }
-        .icon-background(@base, @active){
-            a:before {
-                .background(@base);
-            }
-            &.active a:before {
-                .background(@active);
-            }
-        }
         li {
             flex: 1;
             height: @f-h;
@@ -53,16 +45,24 @@
                 color: @c-f26b00;
             }
             &:first-of-type {
-                .icon-background('tab_shouye_nor@2x.png', 'tab_shouye_sel@2x.png');
+                .icon-background('tab_shouye_nor@3x.png', 'tab_shouye_sel@3x.png');
             }
             &:nth-of-type(2) {
-                .icon-background('tab_shangcheng_nor@2x.png', 'tab_shangcheng_sel@2x.png');
+                .icon-background('tab_shangcheng_nor@3x.png', 'tab_shangcheng_sel@3x.png');
             }
             &:nth-of-type(3) {
-                .icon-background('tab_xiaoxi_nor@2x.png', 'tab_xiaoxi_sel@2x.png');
+                .icon-background('tab_xiaoxi_nor@3x.png', 'tab_xiaoxi_sel@3x.png');
             }
             &:last-of-type {
-                .icon-background('tab_wode_nor@2x.png', 'tab_wode_sel@2x.png');
+                .icon-background('tab_wode_nor@3x.png', 'tab_wode_sel@3x.png');
+            }
+            .icon-background(@base, @active){
+                a:before {
+                    .background(@base);
+                }
+                &.active a:before {
+                    .background(@active);
+                }
             }
         }
         a {            
