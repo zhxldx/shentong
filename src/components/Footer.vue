@@ -38,14 +38,14 @@
     @import '../assets/less/public.less';
     footer {
         width: @body-w;
-        @f-h: 1.30666667rem/* 98px */;
+        @f-h: 1.31rem/* 98px */;
         height: @f-h;
         border-top: solid 1px @c-d8d8d8;
         position: fixed;
         bottom: 0;
         z-index: @zx100;
         ul {
-            width: @body-w - .93333333rem/* 70px */ * 2;
+            width: @body-w - .93rem/* 70px */ * 2;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -99,7 +99,7 @@
             line-height: @fs-22;
         }
         i {
-            @wh: .66666667rem/* 50px */;
+            @wh: .67rem/* 50px */;
             display: block;
             width: @wh;
             height: @wh;
