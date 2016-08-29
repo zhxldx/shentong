@@ -1,0 +1,11 @@
+# Mac crap
+.DS_Store
+
+# WebStorm
+.idea/**/*
+.idea/*
+todo.md
+
+node_modules/*
+dist/*
+npm-debug.log

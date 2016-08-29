@@ -33,6 +33,7 @@
         z-index: @zx100;
         box-sizing: border-box;
         align-items: center;
+        background-color: @c-fff;
         ul {
             width: @body-w;
             display: flex;
