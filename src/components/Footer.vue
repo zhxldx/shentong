@@ -23,7 +23,7 @@
     }
 </script>
 <style lang="less">
-    @import '../assets/less/public.less';
+    @import '~src/styles/mixin.less';
     footer {
         height: @footer-h;
         display: flex;
@@ -60,10 +60,10 @@
             }
             .icon-background(@base, @active){
                 a:before {
-                    .background(@base);
+                    .background-img(@base);
                 }
                 &.active a:before {
-                    .background(@active);
+                    .background-img(@active);
                 }
             }
         }

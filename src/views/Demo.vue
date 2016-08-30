@@ -19,23 +19,11 @@
 			</tbody>
 		</table>
 	</div>
+	
 </template>
 
 <script>
-	import vHeader from '../components/Header.vue'
-	export default {
-		data() {
-			return {
-				goods: [
-					
-				]
-			}
-		},
-		components: {
-			vHeader,
-		}
-	}
-
+	
 </script>
 <style lang="less">
 	tr {
@@ -84,6 +72,9 @@
 	table td, table th {
 		border: none;
 	}
-	
+.dp-container{
+	height: 4rem; // 300px
+	font-size: .4rem; // 30px
+}
 
 </style>

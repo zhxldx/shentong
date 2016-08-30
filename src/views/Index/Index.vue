@@ -1,6 +1,6 @@
 <template>
     <div class="index-box">
-        <v-head></v-head>
+        <v-head :coupon="20000" :integral="20000"></v-head>
     </div>
     <v-footer :active="1"></v-footer>
 </template>
@@ -10,10 +10,10 @@
     export default {
         components: {
             vFooter,
-            vHead
+            vHead,
         },
     }
 </script>
 <style lang="less">
-    @import '../../assets/less/public.less';
+    @import '~src/styles/mixin.less';
 </style>

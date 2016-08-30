@@ -3,11 +3,11 @@
         <div class="left-item">
             <div class="integral">
                 <span class="left-item-word">我的积分</span>
-                <span class="left-item-number">20000</span>
+                <span class="left-item-number">{{integral}}</span>
             </div>
             <div class="coupon">
                 <span class="left-item-word">我的点券</span>
-                <span class="left-item-number">20000</span>
+                <span class="left-item-number">{{coupon}}</span>
             </div>
         </div>
         <div class="right-item">
@@ -16,16 +16,18 @@
     </div>
 </template>
 <script>
-    
+    export default {
+      props: ['integral', 'coupon']
+    }
 </script>
 <style lang="less">
-    @import '../../assets/less/public.less';
+    @import '~src/styles/mixin.less';
     .index-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 4.53333333rem; // 340px
-        .background('shouye_bg@3x.png');
+        .background-img('shouye_bg@3x.png');
     }
     .left-item {
         margin-left: .4rem; // 30px
