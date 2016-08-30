@@ -6,5 +6,6 @@
 .idea/*
 todo.md
 
+dist/*
 node_modules/*
 npm-debug.log
