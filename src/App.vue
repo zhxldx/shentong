@@ -2,8 +2,8 @@
     <router-view></router-view>
 </template>
 <style lang="less">
-    @import '~/static/neat.min.css';
-    @import '~/static/base.css';
+    @import '~src/styles/neat.min.css';
+    @import '~src/styles/base.css';
     @import '~src/styles/mixin.less';
     html {
         height: 100%;

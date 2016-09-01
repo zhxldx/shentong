@@ -1,5 +1,5 @@
 <template>
-	<div class="Demo">
+	<!-- <div class="Demo">
 		<table>
 			<thead>
 				<tr>
@@ -18,15 +18,44 @@
 				</tr>
 			</tbody>
 		</table>
+	</div> -->
+	
+	<div v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+	  <li v-for="item in data">{{item.name}}</li>
 	</div>
+	
 	
 </template>
 
 <script>
-	
+	var count = 0;
+	export default {
+		components: {
+			
+		},
+		data() {
+		    return {
+		    	data: [],
+		    	busy: false
+		    }
+		  },
+		  methods: {
+		    loadMore: function() {
+		      this.busy = true;
+		      setTimeout(() => {
+		        for (var i = 0, j = 10; i < j; i++) {
+		          this.data.push({ name: count++ });
+		        }
+		        this.busy = false;
+		      }, 1000);
+		    }
+		  }
+	}
 </script>
 <style lang="less">
-	tr {
+	@import '~src/styles/mixin.less';
+
+	/*tr {
 		border-bottom: 1px solid red;
 		display: flex;
 		width: 500px;
@@ -71,10 +100,6 @@
 	}
 	table td, table th {
 		border: none;
-	}
-.dp-container{
-	height: 4rem; // 300px
-	font-size: .4rem; // 30px
-}
+	}*/
 
 </style>

@@ -17,7 +17,7 @@
 </template>
 <script>
     export default {
-      props: ['integral', 'coupon']
+        props: ['integral', 'coupon']
     }
 </script>
 <style lang="less">

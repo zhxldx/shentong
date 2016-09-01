@@ -1,24 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import routerConfig from './routers'
 import App from './App'
+import infiniteScroll from 'vue-infinite-scroll';
+Vue.use(infiniteScroll);
 Vue.use(Router);
-Vue.config.devtools = true
-// var app = Vue.extend({});
+Vue.config.devtools = true;
 const router = new Router({
 
 });
-router.map({
-    '/':{           
-        component: function(resolve){
-            require(['./views/Index/Index'],resolve);
-        }
-    },
-    '/demo':{           
-        component: function(resolve){
-            require(['./views/Demo'],resolve);
-        }
-    },
-});
+routerConfig(router);
 
 router.start(App, '#app');
 
