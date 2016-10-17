@@ -2,21 +2,21 @@
 @body-w: 10rem;
 @footer-h: 1.32rem; // 99px
 /*字体大小*/
-@fs-54: .72rem; // 54px
-@fs-36: .48rem; // 36px
-@fs-32: .42666667rem; // 32px
-@fs-30: .4rem; // 30px
-@fs-28: .37333333rem; // 28px
-@fs-26: .34666667rem; // 26px
-@fs-22: .38666667rem; // 29px
+@fs54: .72rem; // 54px
+@fs36: .48rem; // 36px
+@fs32: .42666667rem; // 32px
+@fs30: .4rem; // 30px
+@fs28: .37333333rem; // 28px
+@fs26: .34666667rem; // 26px
+@fs22: .38666667rem; // 29px
 /*颜色*/
+@bd-color: #e0e0e0;
+@bg-color: #f8f8f8;
 @c-999999: #999999;
 @c-cccccc: #cccccc;
 @c-666666: #666666;
-@c-e0e0e0: #e0e0e0;
 @c-333333: #333333;
 @c-f26b00: #f26b00;
-@c-f8f8f8: #f8f8f8;
 @c-d8d8d8: #d8d8d8;
 @c-fff: #fff;
 /*层级*/
@@ -38,6 +38,18 @@
 .font-size(@fs) {
     font-size: @fs;
     line-height: @fs;
+}
+.wh(@wh) {
+    width: @wh;
+    height: @wh;
+}
+.line-height(@h) {
+    height: @h;
+    line-height: @h;
+}
+.scroll() {
+    overflow-y: auto;
+    -webkit-overflow-scrolling : touch;
 }
 .px-dpr(@name, @px) {
     @{name}: @px / 2;

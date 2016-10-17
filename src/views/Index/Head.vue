@@ -41,10 +41,10 @@
         margin-top: .73333333rem; // 55px
     }
     .left-item-word {
-        .font-size(@fs-32);
+        .font-size(@fs32);
     }
     .left-item-number {
-        .font-size(@fs-54);
+        .font-size(@fs54);
         margin-top: .10666667rem; // 8px
         letter-spacing: 2px;
     }

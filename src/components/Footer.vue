@@ -1,49 +1,32 @@
 <template>
-    <footer>
+    <footer class="component-footer">
         <ul>
-            <li v-for="(k,item) in list" :class="{'active': active==k+1}">
-                <a href="">{{item.title}}</a>
-            </li>
+            <li><a v-link="{path: '/', exact: true}" class="tap-active" href="javascript:;">首页</a></li>
+            <li><a v-link="{path: '/shop', exact: true}" class="tap-active" href="javascript:;">商城</a></li>
+            <li><a v-link="{path: '/message', exact: true}" class="tap-active" href="javascript:;">消息</a></li>
+            <li><a v-link="{path: '/user', exact: true}" class="tap-active" href="javascript:;">我的</a></li>
         </ul>
     </footer>
 </template>
-<script>
-    export default {
-        props: ['active'],
-        data() {
-            return {
-                list: [
-                    { title: '首页', url: '' },
-                    { title: '商城', url: '' },
-                    { title: '消息', url: '' },
-                    { title: '我的', url: '' },
-                ]
-            }
-        }
-    }
-</script>
 <style lang="less">
     @import '~src/styles/mixin.less';
-    footer {
+    .component-footer {
+        width: @body-w;
         height: @footer-h;
-        display: flex;
+        background-color: #fff;
         border-top: solid 1px @c-d8d8d8;
-        position: fixed;
-        bottom: 0;
-        z-index: @zx100;
         box-sizing: border-box;
-        align-items: center;
-        background-color: @c-fff;
         ul {
-            width: @body-w;
             display: flex;
-        }
+        }   
         li {
             flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &.active a {
+            a:before {
+                content: " ";
+                display: block;
+                .wh(.66666667rem); // 50px
+            }
+            a.v-link-active {
                 color: @c-f26b00;
             }
             &:first-of-type {
@@ -66,21 +49,15 @@
                     .background-img(@active);
                 }
             }
-        }
-        a {            
-            text-align: center;
-            font-size: @fs-22;
-            color: @c-999999;
-            line-height: @fs-22;
-            &:before {
-                content: "";
-                @wh: .66666667rem; // 50px
-                display: block;
-                width: @wh;
-                height: @wh;
-                margin: 0 auto;
-                margin-bottom: .12rem; // 9px
-            }
-        }
-    }
+        } 
+        a {
+            display: flex;
+            flex-direction: column;
+            height: @footer-h;
+            align-items: center;
+            justify-content: center;  
+            font-size: @fs22;
+            color: @c-999999; 
+        }   
+    }    
 </style>

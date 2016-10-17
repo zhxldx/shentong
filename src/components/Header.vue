@@ -14,7 +14,7 @@
         background-color: @c-f26b00;
         line-height: @header-h;
         text-align: center;
-        font-size: @fs-36;
+        font-size: @fs36;
         color: @c-fff;
         letter-spacing: 4px;
     }

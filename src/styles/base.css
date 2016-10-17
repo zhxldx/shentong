@@ -1,18 +1,47 @@
+input,textarea,div,span,a {
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+label > * {
+    pointer-events: none;
+}
+.grid {
+    width: 9.2rem; /* 690px */
+    margin: 0 auto;
+}
+.mt20 {
+    margin-top: .3125rem; /* 20px */
+}
+.pt20 {
+    padding-top: .3125rem; /* 20px */
+}
+.radius8 {
+    border-radius: .125rem; /* 8px */
+} 
+.bd {
+    border: solid 1px #e0e0e0;
+}
+.bt {
+    border-top: solid 1px #e0e0e0;
+}
+.bb {
+    border-bottom: solid 1px #e0e0e0;
+}
+.tap-active:active {
+  background-color: #ECECEC;
+}
+.text-overflow {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
 .fl {
     float: left;
 }
 .fr {
     float: right;
 }
-.clearfix {
-    &:after {
-        content: "";
-        display: block;
-        clear: both;
-        visibility: hidden;
-        height: 0;
-    }
-}
-.clearfix{
-    zoom: 1;
-} 
