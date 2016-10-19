@@ -8,10 +8,12 @@ input, textarea, a {
 label > * {
     pointer-events: none;
 }
+// 居中
 .grid {
     width: @gird-w; /* 690px */
     margin: 0 auto;
 }
+// 遮罩层
 .mask {
     position: fixed;
     top: 0;
@@ -20,27 +22,35 @@ label > * {
     height: 100%;
     background-color: rgba(0,0,0,.5);
 }
+// 上外边距20
 .mt20 {
     margin-top: .3125rem; /* 20px */
 }
+// 上内边距20
 .pt20 {
     padding-top: .3125rem; /* 20px */
 }
+// 8px圆角
 .radius8 {
     border-radius: .125rem; /* 8px */
 } 
+// 边框
 .bd {
     border: solid 1px @bd-color;
 }
+// 上边框
 .bt {
     border-top: solid 1px @bd-color;
 }
+// 下边框
 .bb {
     border-bottom: solid 1px @bd-color;
 }
+// 点击效果
 .tap-active:active {
   background-color: #ECECEC;
 }
+// 单行文本超出省略号  需设置宽度
 .text-overflow {
     white-space: nowrap; 
     overflow: hidden; 
