@@ -27,7 +27,7 @@
                 .wh(.66666667rem); // 50px
             }
             a.v-link-active {
-                color: @c-f26b00;
+                color: @orange;
             }
             &:first-of-type {
                 .icon-background('tab_shouye_nor@3x.png', 'tab_shouye_sel@3x.png');

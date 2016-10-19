@@ -1,60 +1,73 @@
 <template>
-	<!-- <div class="Demo">
-		<table>
-			<thead>
-				<tr>
-					<th><span>1</span></th>
-					<th><span>2</span></th>
-					<th><span>2</span></th>
-					<th class="fis"><span>3</span></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><span>11</span></td>
-					<td><span>22</span></td>
-					<td><span>22</span></td>
-					<td class="fis"><span>33</span></td>
-				</tr>
-			</tbody>
-		</table>
-	</div> -->
 	
-	<div v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-	  <li v-for="item in data">{{item.name}}</li>
-	</div>
-	
-	
+	<cell title="选择时间" :arrow="true">
+		<input slot="value" class="test" v-model="test" type="datetime-local" value="2012-05-10T10:20:20">
+	</cell>
 </template>
 
 <script>
-	var count = 0;
+	import vInput from 'components/Input'
+	import Cell from 'components/Cell'
+	import datetime from 'vux/src/components/datetime'
 	export default {
-		components: {
-			
-		},
 		data() {
-		    return {
-		    	data: [],
-		    	busy: false
-		    }
-		  },
-		  methods: {
-		    loadMore: function() {
-		      this.busy = true;
-		      setTimeout(() => {
-		        for (var i = 0, j = 10; i < j; i++) {
-		          this.data.push({ name: count++ });
-		        }
-		        this.busy = false;
-		      }, 1000);
-		    }
-		  }
+			return {
+				show: false,
+				test: '',
+				d: ''
+			}
+		},
+		components: {
+			vInput,
+			datetime,
+		},
+		methods: {
+			test1() {
+				document.querySelector('.test').focus();
+				document.querySelector('.test').focus();
+				// $('.test').click();
+			},
+			change(v) {
+				console.log(v)
+			},
+		},
+		watch: {
+			test(val) {
+				// alert(val)
+			}
+		}
+		
 	}
 </script>
 <style lang="less">
 	@import '~src/styles/mixin.less';
-
+	.test{
+		display: block;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		color: @c-999999;
+		// border: none;
+	}
+	.dp-container {
+		[data-dpr="2"] & {
+		    zoom: 2;
+		}
+		[data-dpr="3"] & {
+		    zoom: 3;
+		}
+	}
+	.weui_cell_ft.with_arrow:after {
+		
+	}
+	.scroller-item {
+		font-size: .42666667rem !important;
+	}
+	.dp-header .dp-item {
+		font-size: .42666667rem !important;
+	}
 	/*tr {
 		border-bottom: 1px solid red;
 		display: flex;

@@ -5,8 +5,8 @@ import VueResource from 'vue-resource'
 import VueLazyComponent from 'vue-lazy-component'
 import VueTocuh from 'vue-touch'
 import InfiniteScroll from 'vue-infinite-scroll'
-import "vue-lazyload-img"
-
+import 'vue-lazyload-img'
+import './lib/sprint.min.js'
 import routerConfig from './routers'
 import App from './App'
 

@@ -6,7 +6,8 @@ const state = {
     	message: '',
     	show: false
     },
-    loading: false
+    loading: false,
+    mask: false
 }
 var toastTimer = 1;
 function toastFun(state, message) {
@@ -43,8 +44,11 @@ const mutations = {
     TOAST(state, message) {
         toastFun(state, message);
     },
-    LOADING(state, data) {
-    	state.loading = data;
+    LOADING(state, loading) {
+    	state.loading = loading;
+    },
+    MASK(state, mask) {
+        state.mask = mask;
     }
 }
 export default new Vuex.Store({

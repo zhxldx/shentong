@@ -1,11 +1,10 @@
 <template>
-    <div class="component-toast" v-show="getToastShowStage.show" class="toast" :class="type">
+    <div class="component-toast radius8" v-show="getToastShowStage.show" class="toast" :class="type">
         {{getToastShowStage.message}}
     </div>
 </template>
 <script>
     import { getToastShowStage } from 'vx/getters'
-    import { toast } from 'vx/actions'
     export default {
         props: {
             type: String,
@@ -14,9 +13,6 @@
         vuex: {
             getters: {
                 getToastShowStage
-            },
-            actions: {
-                toast
             }
         }
     }
@@ -30,9 +26,8 @@
         top: 50%;
         position: fixed;
         background-color: rgba(0,0,0,.7);
-        padding: .2rem; // 15px
+        padding: .33333333rem; // 25px
         color: #fff;
-        border-radius: .09333333rem; // 7px
         z-index: @zx999;
     }
 </style>

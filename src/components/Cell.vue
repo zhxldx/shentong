@@ -35,12 +35,6 @@
          * </cell> 
          *
          * 整体分发
-         * <cell class="class">
-         *     <target></target>
-         *     <target></target>
-         *     ...
-         * </cell>
-         * 或者
          * <cell>
          *     <target class="class">...</target>
          * </cell>

@@ -7,7 +7,12 @@ export default function(router) {
         },
         '/login':{           
             component: function(resolve){
-                require(['./views/Login/Login'],resolve);
+                require(['./views/account/login'],resolve);
+            }
+        },
+        '/register':{           
+            component: function(resolve){
+                require(['./views/account/register'],resolve);
             }
         },
         '/demo':{           
