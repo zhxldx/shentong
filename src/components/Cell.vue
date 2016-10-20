@@ -4,11 +4,11 @@
         @click="handleClick">
         <div class="grid" :style="{'height': h}">
             <slot>
-                <div class="title">
+                <div class="title fs-black">
                     <slot name="title"></slot>
                     {{title}}
                 </div>
-                <div class="value" :class="{'arrow': arrow}">
+                <div class="value fs-gray" :class="{'arrow': arrow}">
                     {{value}}
                     <slot name="value"></slot>
                 </div>
@@ -69,7 +69,6 @@
             display: flex; 
             height: 100%;
             align-items: center; 
-            color: @c-333333;
         }
         .value {
             display: flex; 
@@ -77,7 +76,6 @@
             flex: 1;
             justify-content: flex-end;
             align-items: center;
-            color: @c-999999;
             &.arrow:after {
                 content: " ";
                 display: block;

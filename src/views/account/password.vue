@@ -1,17 +1,17 @@
 <template>
-    <page-title title="登陆"></page-title>
-    <div class="page-login grid mt50">
+    <page-title title="忘记密码"></page-title>
+    <div class="page-password grid mt50">
     	<v-input placeholder="手机号码" type="number"></v-input>
-    	<v-input placeholder="输入密码" type="password"></v-input>
-    	<btn class="btn">登录</btn>
-    	<p>
-    		<a class="fs-gray" 
-            href="javascript:;"
-            v-link="{path: '/register'}">注册帐号</a>
-    		<a class="fs-gray" 
-            href="javascript:;"
-            v-link="{path: '/pwd'}">忘记密码？</a>
-    	</p>
+    	<div class="code-area">
+    		<v-input w="6.26666667rem" placeholder="输入验证码"></v-input>
+    		<btn-code></btn-code>
+    	</div>
+    	<v-input placeholder="输入新密码" type="password"></v-input>
+    	<v-input placeholder="确认密码" type="password"></v-input>
+    	<btn class="btn">确认</btn>
+    	<p class="page-bottom">
+            <a class="fs-gray" href="">或通过服务电话</a>   
+        </p>
     </div>
 </template>
 <script>
@@ -46,15 +46,16 @@
 </script>
 <style lang="less">
    @import '~src/styles/mixin.less';
-    .page-login {
+    .page-password {
         .btn {
         	margin-top: .64rem; // 48px
         }
-		p {
-			display: flex;
-			justify-content: space-between;
-            font-size: @fs28;
-			margin-top: .46666667rem; // 35px 
+		.page-bottom {
+			font-size: @fs26;
+			margin-top: .46666667rem; // 35px
+            a {
+                text-decoration: underline;
+            }
 		}
     }
 </style>

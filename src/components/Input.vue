@@ -1,5 +1,5 @@
 <template>
-    <input class="component-input bd radius8 mt20" 
+    <input class="component-input bd radius8 mt20 fs-black" 
         :placeholder="placeholder"
         :type="type"
         v-model="value" 
@@ -26,9 +26,8 @@
     .component-input {
         box-sizing: border-box;
         width: 100%;
-        height: 1.2rem; // 90px
+        height: 1.17333333rem; // 88px
         padding-left: .4rem; // 30px
-        color: @c-333333;
         &::-webkit-input-placeholder {
             color: @c-999999;
         }

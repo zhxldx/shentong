@@ -15,6 +15,11 @@ export default function(router) {
                 require(['./views/account/register'],resolve);
             }
         },
+        '/pwd':{           
+            component: function(resolve){
+                require(['./views/account/password'],resolve);
+            }
+        },
         '/demo':{           
             component: function(resolve){
                 require(['./views/Demo'],resolve);
