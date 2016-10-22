@@ -1,17 +1,19 @@
 <template>
     <page-title title="登陆"></page-title>
-    <div class="page-login grid mt50">
-    	<v-input placeholder="手机号码" type="number"></v-input>
-    	<v-input placeholder="输入密码" type="password"></v-input>
-    	<btn class="btn">登录</btn>
-    	<p>
-    		<a class="fs-gray" 
-            href="javascript:;"
-            v-link="{path: '/register'}">注册帐号</a>
-    		<a class="fs-gray" 
-            href="javascript:;"
-            v-link="{path: '/pwd'}">忘记密码？</a>
-    	</p>
+    <div class="page page-login">
+    	<div class="grid mt50">
+            <v-input placeholder="手机号码" type="number"></v-input>
+            <v-input placeholder="输入密码" type="password"></v-input>
+            <btn class="btn">登录</btn>
+            <p>
+                <a class="fs-gray" 
+                 href="javascript:;"
+                 v-link="{path: '/register'}">注册帐号</a>
+                <a class="fs-gray" 
+                 href="javascript:;"
+                 v-link="{path: '/pwd'}">忘记密码？</a>
+            </p>   
+        </div>
     </div>
 </template>
 <script>
@@ -19,7 +21,6 @@
     import vInput from 'components/Input'
     import PageTitle from 'components/PageTitle'
     import Btn from 'components/Btn'
-    import PickerModal from 'components/PickerModal'
     import BtnCode from './btn-code'
     export default {
     	data() {
@@ -34,8 +35,7 @@
             vInput,
             Btn,
             BtnCode,
-            Cell,
-            PickerModal
+            Cell
         },
         methods: {
         	handlePick() {

@@ -1,17 +1,19 @@
 <template>
     <page-title title="注册"></page-title>
-    <div class="page-register grid mt50">
-    	<v-input placeholder="手机号码" type="number"></v-input>
-    	<div class="code-area">
-    		<v-input w="6.26666667rem" placeholder="输入验证码"></v-input>
-    		<btn-code></btn-code>
-    	</div>
-    	<v-input placeholder="姓名"></v-input>
-    	<div class="departments-picker mt20 radius8 bd fs-gray" @click="handlePick">{{department}}</div>
-    	<v-input placeholder="输入密码" type="password"></v-input>
-    	<v-input placeholder="确认密码" type="password"></v-input>
-    	<btn class="btn">注册</btn>
-    	<p class="notice fs-gray">审核时间为1-2个工作日</p>
+    <div class="page page-register">
+        <div class="grid mt50">
+            <v-input placeholder="手机号码" type="number"></v-input>
+            <div class="code-area">
+                <v-input w="6.26666667rem" placeholder="输入验证码"></v-input>
+                <btn-code></btn-code>
+            </div>
+            <v-input placeholder="姓名"></v-input>
+            <div class="departments-picker mt20 radius8 bd fs-gray" @click="handlePick">{{department}}</div>
+            <v-input placeholder="输入密码" type="password"></v-input>
+            <v-input placeholder="确认密码" type="password"></v-input>
+            <btn class="btn">注册</btn>
+            <p class="notice fs-gray">审核时间为1-2个工作日</p>
+        </div>
     </div>
     <picker-modal title="选择部门" action-msg="完成" :show.sync="pickerShow">
     	<div class="departments-picker-list">

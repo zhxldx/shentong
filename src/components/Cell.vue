@@ -60,6 +60,7 @@
     .component-cell {
         width: @body-w;
         background-color: #fff;
+        font-size: @fs30;
         .grid {
             display: flex;
             align-items: center;

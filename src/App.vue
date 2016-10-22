@@ -36,11 +36,14 @@
         height: 100%;
         margin: 0 auto;
         background-color: @bg-color;
+        overflow-x: hidden;
     }
     #app{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         width: @body-w;
         position: relative;
-        overflow-x: hidden;
         .font-size(@fs32);
     }
 </style>

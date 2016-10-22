@@ -2,7 +2,7 @@ export default function(router) {
     router.map({
         '/':{           
             component: function(resolve){
-                require(['./views/Index/Index'],resolve);
+                require(['./views/home/index'],resolve);
             }
         },
         '/login':{           
@@ -18,6 +18,27 @@ export default function(router) {
         '/pwd':{           
             component: function(resolve){
                 require(['./views/account/password'],resolve);
+            }
+        },
+        '/shop':{           
+            component: function(resolve){
+                require(['./views/shop/index'],resolve);
+            }
+        },
+
+        '/user':{           
+            component: function(resolve){
+                require(['./views/user/center'],resolve);
+            }
+        },
+        '/user/message':{           
+            component: function(resolve){
+                require(['./views/user/message'],resolve);
+            }
+        },
+        '/user/integral':{           
+            component: function(resolve){
+                require(['./views/user/integral'],resolve);
             }
         },
         '/demo':{           

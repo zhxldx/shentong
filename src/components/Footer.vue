@@ -1,9 +1,9 @@
 <template>
-    <footer class="component-footer">
+    <footer class="component-footer bt">
         <ul>
             <li><a v-link="{path: '/', exact: true}" class="tap-active" href="javascript:;">首页</a></li>
             <li><a v-link="{path: '/shop', exact: true}" class="tap-active" href="javascript:;">商城</a></li>
-            <li><a v-link="{path: '/message', exact: true}" class="tap-active" href="javascript:;">消息</a></li>
+            <li><a v-link="{path: '/user/message', exact: true}" class="tap-active" href="javascript:;">消息</a></li>
             <li><a v-link="{path: '/user', exact: true}" class="tap-active" href="javascript:;">我的</a></li>
         </ul>
     </footer>
@@ -14,7 +14,6 @@
         width: @body-w;
         height: @footer-h;
         background-color: #fff;
-        border-top: solid 1px @c-d8d8d8;
         box-sizing: border-box;
         ul {
             display: flex;
@@ -45,7 +44,7 @@
                 a:before {
                     .background-img(@base);
                 }
-                &.active a:before {
+                a.v-link-active:before {
                     .background-img(@active);
                 }
             }

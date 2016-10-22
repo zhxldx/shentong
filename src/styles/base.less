@@ -13,6 +13,11 @@ label > * {
     width: @gird-w; /* 690px */
     margin: 0 auto;
 }
+.page {
+    flex: 1;
+    .scroll();
+    padding-bottom: .53333333rem;
+}
 // 遮罩层
 .mask {
     position: fixed;
@@ -33,9 +38,21 @@ label > * {
 .pt20 {
     padding-top: .3125rem; /* 20px */
 }
+.pt30 {
+    padding-top: .4rem; // 30px
+}
+.pt10 {
+    padding-top: .13333333rem; // 10px
+}
+.pb98 {
+    padding-bottom: @footer-h;
+}
 // 8px圆角
 .radius8 {
     border-radius: .125rem; /* 8px */
+} 
+.radius10 {
+    border-radius: .13333333rem; // 10px
 } 
 // 边框
 .bd {
@@ -48,6 +65,10 @@ label > * {
 // 下边框
 .bb {
     border-bottom: solid 1px @bd-color;
+}
+.fixed-btm {
+    position: fixed;
+    bottom: 0;
 }
 // 点击效果
 .tap-active:active {
@@ -65,7 +86,7 @@ label > * {
 .fs-gray {
     color: @c-999999;
 }
-.fs-gray-plus {
+.fs-gray-small {
     color: @c-666666;
 }
 .fs-orange {
