@@ -41,6 +41,18 @@ export default function(router) {
                 require(['./views/user/integral'],resolve);
             }
         },
+
+
+        '/rank':{           
+            component: function(resolve){
+                require(['./views/rank/index'],resolve);
+            }
+        },
+        '/note':{           
+            component: function(resolve){
+                require(['./views/note/index'],resolve);
+            }
+        },
         '/demo':{           
             component: function(resolve){
                 require(['./views/Demo'],resolve);
