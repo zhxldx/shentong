@@ -41,6 +41,16 @@ export default function(router) {
                 require(['./views/user/integral'],resolve);
             }
         },
+        '/news':{           
+            component: function(resolve){
+                require(['./views/news/list'],resolve);
+            }
+        },
+        '/news/detail':{           
+            component: function(resolve){
+                require(['./views/news/detail'],resolve);
+            }
+        },
         '/demo':{           
             component: function(resolve){
                 require(['./views/Demo'],resolve);
