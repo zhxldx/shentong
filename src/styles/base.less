@@ -27,6 +27,12 @@ label > * {
     height: 100%;
     background-color: rgba(0,0,0,.5);
 }
+.bottom {
+    display: flex;
+    height: 1.73333333rem; // 130px
+    justify-content: center;
+    align-items: center;
+}
 // 上外边距20
 .mt20 {
     margin-top: .3125rem; /* 20px */
@@ -66,10 +72,6 @@ label > * {
 .bb {
     border-bottom: solid 1px @bd-color;
 }
-.fixed-btm {
-    position: fixed;
-    bottom: 0;
-}
 // 点击效果
 .tap-active:active {
   background-color: #ECECEC;
@@ -94,6 +96,9 @@ label > * {
 }
 .fs-black {
     color: @c-333333;
+}
+.bg-white {
+    background-color: #fff;
 }
 .overflow-hidden {
     overflow: hidden;

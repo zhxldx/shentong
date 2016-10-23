@@ -26,6 +26,7 @@ export default function(router) {
             }
         },
 
+        // 用户
         '/user':{           
             component: function(resolve){
                 require(['./views/user/center'],resolve);
@@ -61,9 +62,32 @@ export default function(router) {
                 require(['./views/rank/index'],resolve);
             }
         },
+
+        // 日志
         '/note':{           
             component: function(resolve){
                 require(['./views/note/index'],resolve);
+            }
+        },
+        '/note/day':{           
+            component: function(resolve){
+                require(['./views/note/release-day'],resolve);
+            }
+        },
+        '/note/week':{           
+            component: function(resolve){
+                require(['./views/note/release-week'],resolve);
+            }
+        },
+
+        '/leave':{           
+            component: function(resolve){
+                require(['./views/leave/index'],resolve);
+            }
+        },
+        '/leave/ask':{           
+            component: function(resolve){
+                require(['./views/leave/ask-leave'],resolve);
             }
         },
         '/demo':{           
