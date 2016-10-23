@@ -21,7 +21,9 @@
         <div class="handle-list mt20 bt">
             <ul>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_yingxiongbang@3x.png">英雄榜</a>
+                    <a class="tap-active" href="javascript:;" v-link="'/rank'">
+                        <img src="../../assets/icon_yingxiongbang@3x.png">英雄榜
+                    </a>
                 </li>
                 <li>
                     <a class="tap-active" href="javascript:;"><img src="../../assets/icon_zixun@3x.png">资讯</a>
@@ -30,7 +32,9 @@
                     <a class="tap-active" href="javascript:;"><img src="../../assets/icon_gonggao@3x.png">公告</a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_rizhi@3x.png">日志</a>
+                    <a class="tap-active" href="javascript:;" v-link="'/note'">
+                        <img src="../../assets/icon_rizhi@3x.png">日志
+                    </a>
                 </li>
                 <li>
                     <a class="tap-active" href="javascript:;"><img src="../../assets/icon_qingjia@3x.png">请假</a>

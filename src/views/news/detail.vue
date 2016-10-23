@@ -48,6 +48,7 @@ export default {
         color: #666;
         text-indent: 2em;
         line-height: 1.5em;
+        margin-top: .4rem;  // 30px
     }
 }
 .btn-container {

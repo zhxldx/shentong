@@ -51,6 +51,21 @@ export default function(router) {
                 require(['./views/news/detail'],resolve);
             }
         },
+        '/news/comments':{           
+            component: function(resolve){
+                require(['./views/news/comments'],resolve);
+            }
+        },
+        '/rank':{           
+            component: function(resolve){
+                require(['./views/rank/index'],resolve);
+            }
+        },
+        '/note':{           
+            component: function(resolve){
+                require(['./views/note/index'],resolve);
+            }
+        },
         '/demo':{           
             component: function(resolve){
                 require(['./views/Demo'],resolve);
