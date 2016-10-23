@@ -67,6 +67,7 @@ export default function(router) {
             }
         },
 
+        // 请假
         '/leave':{           
             component: function(resolve){
                 require(['./views/leave/index'],resolve);
@@ -75,6 +76,18 @@ export default function(router) {
         '/leave/ask':{           
             component: function(resolve){
                 require(['./views/leave/ask-leave'],resolve);
+            }
+        },
+
+        // 福利
+        '/welfare':{           
+            component: function(resolve){
+                require(['./views/welfare/index'],resolve);
+            }
+        },
+        '/welfare/detail':{           
+            component: function(resolve){
+                require(['./views/welfare/detail'],resolve);
             }
         },
         '/demo':{           

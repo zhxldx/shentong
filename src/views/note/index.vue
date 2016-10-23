@@ -3,10 +3,10 @@
     <page-title title="日志"></page-title>
     <div class="tabs bb">
         <ul>
-            <li class="active">
+            <li class="fs-30 active">
                 <span>日报</span>
             </li>
-            <li>
+            <li class="fs-30">
                 <span>周报</span>
             </li>
         </ul>
@@ -34,7 +34,7 @@
             href="javascript:;"
             @click="handleGoRelease('/note/week')">周 报</a>
 	    </div>
-	    <a class="cancle fs-gray-small bt" 
+	    <a class="cancle fs-gray-plus bt fs-36" 
 	    href="javascript:;"
 	    @click="handleCancle">取 消</a>
 	</div>
@@ -93,7 +93,6 @@
             display: flex;
             height: 1.33333333rem; // 100px
             align-items: center;
-            font-size: @fs30;
             background-color: #fff;
             position: relative;
             &:first-of-type span {
@@ -166,7 +165,6 @@
     		display: block;
     		.line-height(1.29333333rem);
     		text-align: center;
-    		font-size: @fs36;
     	}
 
     	&.slide-transition {

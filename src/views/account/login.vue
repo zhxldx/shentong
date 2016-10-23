@@ -5,7 +5,7 @@
             <v-input placeholder="手机号码" type="number"></v-input>
             <v-input placeholder="输入密码" type="password"></v-input>
             <btn class="btn">登录</btn>
-            <p>
+            <p class="fs-28">
                 <a class="fs-gray" 
                  href="javascript:;"
                  v-link="{path: '/register'}">注册帐号</a>
@@ -53,7 +53,6 @@
 		p {
 			display: flex;
 			justify-content: space-between;
-            font-size: @fs28;
 			margin-top: .46666667rem; // 35px 
 		}
     }

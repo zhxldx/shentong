@@ -4,12 +4,12 @@
         <div class="grid" v-infinite-scroll="loadMore()" infinite-scroll-disabled="loadMoreBusy" infinite-scroll-distance="100" infinite-scroll-immediate-check="false">
             <ul>
                 <li v-for="item in list">
-                    <span class="date-time radius8 fs-white">2016-09-12 09:09</span>
+                    <span class="date-time radius8 fs-white fs-24">2016-09-12 09:09</span>
                     <div class="msg-card radius10 mt20 bd">
-                        <div class="title new">
+                        <div class="title new fs-30">
                             <p class="text-overflow fs-black">七部委启动第三批电子商务示范城市申报</p>
                         </div>
-                        <a class="fs-gray" href="javascript:;">
+                        <a class="fs-gray fs-24" href="javascript:;">
                             点击查看
                         </a>
                     </div>
@@ -60,13 +60,11 @@
         .date-time {
             padding: .12rem .38666667rem;
             background-color: @c-d8d8d8;
-            font-size: @fs24;
         }
         .msg-card {
             width: 100%;
             background-color: #fff;
             .title {
-                font-size: @fs30;
                 padding: .44rem 0;
                 position: relative;
                 p {
@@ -88,7 +86,6 @@
                 display: flex;
                 align-items: center;
                 .line-height(.93333333rem); // 70px
-                font-size: @fs24;
                 text-indent: .26666667rem;
                 justify-content: space-between;
                 &:after {

@@ -1,5 +1,5 @@
 <template>
-    <div class="component-cell bb" 
+    <div class="component-cell bb fs-30" 
         :class="{'tap-active': arrow}"
         @click="handleClick">
         <div class="grid" :style="{'height': h}">
@@ -60,7 +60,6 @@
     .component-cell {
         width: @body-w;
         background-color: #fff;
-        font-size: @fs30;
         .grid {
             display: flex;
             align-items: center;

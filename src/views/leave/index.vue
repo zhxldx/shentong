@@ -4,9 +4,9 @@
         <cell h="1.73333333rem" v-for="item in 15">
             <div slot="title">
                 <p class="fs-black">请假标题</p>
-                <p class="fs-gray text-overflow">同意</p>
+                <p class="fs-gray text-overflow fs-26">同意</p>
             </div>
-            <span class="fs-gray" slot="value">07-11 09:00</span>
+            <span class="fs-gray fs-26" slot="value">07-11 09:00</span>
         </cell>
     </div>
     <div class="bottom bg-white bt">
@@ -43,9 +43,6 @@
         }
         .fs-black {
             line-height: .6rem; // 45px
-        }
-        .fs-gray {
-            font-size: @fs26;
         }
         .apply-person {
             div[slot=title] i{

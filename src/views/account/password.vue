@@ -10,7 +10,7 @@
                 <v-input placeholder="输入新密码" type="password"></v-input>
                 <v-input placeholder="确认密码" type="password"></v-input>
                 <btn class="btn">确认</btn>
-                <p class="page-bottom">
+                <p class="page-bottom fs-26">
                     <a class="fs-gray" href="">或通过服务电话</a>   
                 </p>
         </div>
@@ -51,7 +51,6 @@
         	margin-top: .64rem; // 48px
         }
 		.page-bottom {
-			font-size: @fs26;
 			margin-top: .46666667rem; // 35px
             a {
                 text-decoration: underline;
