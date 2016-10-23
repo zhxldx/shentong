@@ -37,7 +37,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_qingjia@3x.png">请假</a>
+                    <a class="tap-active" href="javascript:;" v-link="'/leave'">
+                        <img src="../../assets/icon_qingjia@3x.png">请假
+                    </a>
                 </li>
                 <li>
                     <a class="tap-active" href="javascript:;"><img src="../../assets/icon_fuli@3x.png">员工福利</a>

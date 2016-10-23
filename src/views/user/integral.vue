@@ -24,11 +24,7 @@
 <style lang="less">
     @import '~src/styles/mixin.less';
     .page-user-integral {
-        .title {
-            flex:2;
-        }
         .fs-black {
-            font-size: @fs36;
             line-height: .6rem; // 45px
         }
         .fs-gray {
