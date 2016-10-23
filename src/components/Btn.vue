@@ -1,6 +1,6 @@
 <template>
     <a href="javascript:;"
-    class="component-btn radius8 fs-white"
+    class="component-btn radius8 fs-white fs-36"
     v-link="link"><slot></slot></a>
 </template>
 <script>
@@ -17,7 +17,6 @@
         width: @gird-w;
         .line-height(1.13333333rem);
         text-align: center;
-        font-size: @fs36;
         background-color: @orange;
         &:active {
             background-color: darken(@orange, 5%);

@@ -2,7 +2,7 @@
     <page-title title="首页"></page-title>
     <div class="page page-home">
         <div class="head fs-white">
-            <div class="left-item">
+            <div class="left-item fs-32">
                 <div class="integral">
                     <span>我的积分</span>
                     <p>20000</p>
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="handle-list mt20 bt">
+        <div class="handle-list mt20 bt fs-30">
             <ul>
                 <li>
                     <a class="tap-active" href="javascript:;" v-link="'/rank'">
@@ -42,7 +42,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_fuli@3x.png">员工福利</a>
+                    <a class="tap-active" href="javascript:;" v-link="'/welfare'">
+                        <img src="../../assets/icon_fuli@3x.png">员工福利
+                    </a>
                 </li>
                 <li>
                     <a class="tap-active" href="javascript:;"><img src="../../assets/icon_jiafen@3x.png">申请加分</a>
@@ -79,7 +81,6 @@
             span {
                 display: block;
                 letter-spacing: 1px;
-                .font-size(@fs32);
             }
             p {
                 .font-size(@fs54);
@@ -131,7 +132,6 @@
                 align-items: center;
                 justify-content: center;
                 color: @c-666666;
-                font-size: @fs30;
             }
         }
     }

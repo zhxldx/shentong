@@ -1,6 +1,6 @@
 <template>
     <a href="javascript:;"
-     class="account-btn-code radius8 mt20 fs-white"
+     class="account-btn-code radius8 mt20 fs-white fs-28"
      :class="{'disabled': disabled}"
      @click="handleClick">{{content}}</a>
 </template>
@@ -56,7 +56,6 @@
         width: 2.66666667rem; // 200px
         .line-height(1.17333333rem);
         text-align: center;
-        font-size: @fs28;
         @bgcolor: #fcac34;
         background-color: @bgcolor;
         &:active {

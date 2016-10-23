@@ -2,13 +2,13 @@
     <page-title title="英雄榜"></page-title>
     <div class="tabs bb">
         <ul>
-            <li class="active">
+            <li class="fs-30 active">
                 <span>总排行</span>
             </li>
-            <li>
+            <li class="fs-30">
                 <span>部门排行</span>
             </li>
-            <li>
+            <li class="fs-30">
                 <span>部门PK</span>
             </li>
         </ul>
@@ -16,7 +16,7 @@
     <div class="page page-rank">
         <div class="rank-list pt20">
             <table>
-                <thead class="fs-white">
+                <thead class="fs-white fs-28">
                     <tr>
                         <th><span>排名</span></th>
                         <th><span>姓名</span></th>
@@ -26,13 +26,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in 15">
-                        <td class="fs-gray-small">1</td>
-                        <td class="fs-black">
+                        <td class="fs-gray-plus fs-30">1</td>
+                        <td class="fs-black fs-30">
                             <img src="../../assets/paihangbang_touxiang@3x.png">
                             李大仁
                         </td>
-                        <td class="fs-gray">1000</td>
-                        <td class="fs-gray">商务经理</td>
+                        <td class="fs-gray fs-28">1000</td>
+                        <td class="fs-gray fs-28">商务经理</td>
                     </tr>
                 </tbody>
             </table>
@@ -63,7 +63,6 @@
             display: flex;
             height: 1.33333333rem; // 100px
             align-items: center;
-            font-size: @fs30;
             background-color: #fff;
             position: relative;
             &:nth-of-type(2) span {
@@ -119,7 +118,6 @@
             }
             thead {
                 background-color: @orange;
-                font-size: @fs28;
                 th {
                     height: .8rem; // 60px
                 }
@@ -142,12 +140,6 @@
                         vertical-align: -.32rem; // 24px
                         padding-right: .13333333rem; // 10px
                     }
-                }
-                .fs-black, .fs-gray-small {
-                    font-size: @fs30;
-                }
-                .fs-gray {
-                    font-size: @fs28;
                 }
             }
         }

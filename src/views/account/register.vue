@@ -12,7 +12,7 @@
             <v-input placeholder="输入密码" type="password"></v-input>
             <v-input placeholder="确认密码" type="password"></v-input>
             <btn class="btn">注册</btn>
-            <p class="notice fs-gray">审核时间为1-2个工作日</p>
+            <p class="notice fs-gray fs-26">审核时间为1-2个工作日</p>
         </div>
     </div>
     <picker-modal title="选择部门" action-msg="完成" :show.sync="pickerShow">
@@ -73,7 +73,6 @@
         }
 		.notice {
 			text-align: center;
-			font-size: @fs26;
 			margin-top: .46666667rem; // 35px
 			&:before {
 				content: " ";

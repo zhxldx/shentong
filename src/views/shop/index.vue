@@ -6,7 +6,7 @@
                 <a class="tap-active" href="javascript:;">
                     <img class="pt30" src="../../assets/pic_e@2x.png">
                     <p class="fs-black pt30">太阳伞</p>
-                    <p class="fs-gray pt10">点券数：<span class="fs-orange">100</span></p>
+                    <p class="fs-gray fs-26 pt10">点券数：<span class="fs-orange">100</span></p>
                 </a>
             </li>
         </ul>
@@ -44,9 +44,6 @@
                 }
                 p {
                     width: 4.26666667rem; // 320px
-                }
-                .fs-gray {
-                    font-size: @fs26;
                 }
             }
         }

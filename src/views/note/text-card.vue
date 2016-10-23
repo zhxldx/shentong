@@ -2,7 +2,7 @@
 	<div class="compoent-text-card-note bt bb mt20 bg-white">
 		<div class="grid fs-black pt20">
 			{{title}}
-		    <textarea class="pt20" :placeholder="placeholder" v-model="value"></textarea>
+		    <textarea class="fs-30" class="pt20" :placeholder="placeholder" v-model="value"></textarea>
 		</div>
 	</div>
 </template>
@@ -19,7 +19,6 @@
     @import '~src/styles/mixin.less';
     .compoent-text-card-note {
         textarea {
-        	font-size: @fs30;
         	width: 100%;
             height: 2.66666667rem; // 200px
             padding: .26666667rem 0;
