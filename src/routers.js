@@ -42,8 +42,21 @@ export default function(router) {
                 require(['./views/user/integral'],resolve);
             }
         },
-
-        // 英雄榜
+        '/news':{           
+            component: function(resolve){
+                require(['./views/news/list'],resolve);
+            }
+        },
+        '/news/detail':{           
+            component: function(resolve){
+                require(['./views/news/detail'],resolve);
+            }
+        },
+        '/news/comments':{           
+            component: function(resolve){
+                require(['./views/news/comments'],resolve);
+            }
+        },
         '/rank':{           
             component: function(resolve){
                 require(['./views/rank/index'],resolve);
