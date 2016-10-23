@@ -47,7 +47,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_jiafen@3x.png">申请加分</a>
+                    <a class="tap-active" href="javascript:;" v-link="'/addIntegral'">
+                        <img src="../../assets/icon_jiafen@3x.png">申请加分
+                    </a>
                 </li>
                 <li></li>
                 <li></li>

@@ -90,6 +90,13 @@ export default function(router) {
                 require(['./views/welfare/detail'],resolve);
             }
         },
+
+        // 申请加分
+        '/addIntegral':{           
+            component: function(resolve){
+                require(['./views/add-integral/index'],resolve);
+            }
+        },
         '/demo':{           
             component: function(resolve){
                 require(['./views/Demo'],resolve);
