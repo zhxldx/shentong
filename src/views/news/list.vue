@@ -24,6 +24,7 @@ export default {
 .l-cell {
     padding: .26666667rem 0;
     display: flex;
+    border-bottom: 1px solid @bd-color;
     img {
         display: block;
         width: 3.46666667rem;  // 260px 
