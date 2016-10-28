@@ -9,22 +9,22 @@
             <p class="positon fs-white pt10">商务经理</p>
         </div>
         <div class="handle-list pt20">
-            <cell link="/user/integral" class="bt" title="我的积分" :arrow="true">
+            <cell class="bt" title="我的积分" :arrow="true" link="/user/integral">
                 <img slot="title" src="../../assets/wode_wdjf@3x.png">
             </cell>
-            <cell title="我的履历" :arrow="true">
+            <cell title="我的履历" :arrow="true" link="/user/resume">
                 <img slot="title" src="../../assets/wode_lvli@3x.png">
             </cell>
-            <cell title="我的下属" :arrow="true">
+            <cell title="我的下属" :arrow="true" link="/user/subordinate">
                 <img slot="title" src="../../assets/wode_wdxs@3x.png">
             </cell>
-            <cell title="兑换记录" :arrow="true">
+            <cell title="兑换记录" :arrow="true" link="/user/exchange">
                 <img slot="title" src="../../assets/wode_dhjl@3x.png">
             </cell>
             <cell title="给领导打分" :arrow="true">
                 <img slot="title" src="../../assets/wode_glddf@3x.png">
             </cell>
-            <cell title="自助申请加分" :arrow="true">
+            <cell title="自助申请加分" :arrow="true" link="/addIntegral">
                 <img slot="title" src="../../assets/wode_zzsqjf@3x.png">
             </cell>
             <cell title="意见或者建议" :arrow="true">

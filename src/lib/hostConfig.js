@@ -1,4 +1,4 @@
 module.exports = {
-	httpHost: 'http://manager.tuuwuu.com/index.php/Api/',
-	imgHost: 'http://manager.tuuwuu.com/',
+	httpHost: '182.254.134.123:8080/shentong/',
+	imgHost: '182.254.134.123:8080/',
 }

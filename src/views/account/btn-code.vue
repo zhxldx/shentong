@@ -5,6 +5,8 @@
      @click="handleClick">{{content}}</a>
 </template>
 <script>
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
     export default {
         props: {
             phone: String
@@ -18,7 +20,10 @@
         },
         methods: {
             handleClick() {
-                if(!this.verfiy()) return;
+                if(!this.verfiy()) {
+                    this.toast('请输入手机号');
+                    return;
+                }
                 if(this.disabled) return;
                 let time = this.time;
                 this.disabled = true;
@@ -33,6 +38,11 @@
                     }
                     this.format(time);
                 }, 1000);
+
+                http.handle(this, 'user/checkPhone')
+                .then(() => {
+
+                })
             },
             format(time) {
                 if(time > 0) {
@@ -42,9 +52,15 @@
                 }
             },
             verfiy() {
-                if(!this.phone) {
+                if(this.phone) {
                     return true;
                 }
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
             }
         }
     }

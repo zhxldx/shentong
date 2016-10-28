@@ -1,10 +1,10 @@
 <template>
-<ul class="comments">
+<ul class="comments page">
     <li v-for="comment in comments">
         <div class="comment">
             <div class="comment-head">
                 <div class="avatar">
-                    <img src="{{comment.avatar}}" alt="">
+                    <img :src="comment.avatar">
                 </div>
                 <div class="meta-data">
                     <span>{{comment.realName}}</span>
@@ -125,7 +125,8 @@ export default {
     position: fixed;
     left: 0;
     bottom: 0;
-
+    z-index: 1;
+    background-color: @bg-color;
     input {
         flex: 1;
         height: .8rem;  // 60px

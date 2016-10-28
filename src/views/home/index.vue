@@ -26,10 +26,14 @@
                     </a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_zixun@3x.png">资讯</a>
+                    <a class="tap-active" href="javascript:;" v-link="'/news'">
+                        <img src="../../assets/icon_zixun@3x.png">资讯
+                    </a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;"><img src="../../assets/icon_gonggao@3x.png">公告</a>
+                    <a class="tap-active" href="javascript:;">
+                        <img src="../../assets/icon_gonggao@3x.png">公告
+                    </a>
                 </li>
                 <li>
                     <a class="tap-active" href="javascript:;" v-link="'/note'">

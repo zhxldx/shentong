@@ -38,6 +38,8 @@
     import Btn from 'components/Btn'
     import PickerModal from 'components/PickerModal'
     import BtnCode from './btn-code'
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
     export default {
     	data() {
     		return {
@@ -58,6 +60,12 @@
         	handlePick() {
         		this.pickerShow = true;
         	}
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
         }
     }
 </script>

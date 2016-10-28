@@ -35,20 +35,20 @@ module.exports = {
 	},
 	handle(self, url, param) {
 		return new Promise((resolve) => {
-			self.loading(true);
+			// self.loading(true);
 		    self.$http.post(`${this.httpHost}${url}`, param || {})
 		    .then((res) => {
 		        var body = res.body;
-		        if(body.status) {
-		        	self.loading(false);
-		            resolve(body.data);
-		        }else {
-		            self.loading(false);
-		            self.toast(body.msg);
-		        }
+		        // if(body.status) {
+		        // 	self.loading(false);
+		        //     resolve(body.data);
+		        // }else {
+		        //     self.loading(false);
+		        //     self.toast(body.msg);
+		        // }
 		    })
 		    .catch(() => {
-		        self.loading(false);
+		        // self.loading(false);
 		        self.toast('请求失败');
 		    })
 		});
