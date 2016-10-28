@@ -57,6 +57,16 @@ export default function(router) {
                 require(['./views/news/comments'],resolve);
             }
         },
+        '/notice':{           
+            component: function(resolve){
+                require(['./views/notice/list'],resolve);
+            }
+        },
+        '/notice/detail':{           
+            component: function(resolve){
+                require(['./views/notice/detail'],resolve);
+            }
+        },
         '/rank':{           
             component: function(resolve){
                 require(['./views/rank/index'],resolve);
