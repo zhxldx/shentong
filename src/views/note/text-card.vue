@@ -2,7 +2,10 @@
 	<div class="compoent-text-card-note bt bb mt20 bg-white">
 		<div class="grid fs-black pt20">
 			{{title}}
-		    <textarea class="fs-30" class="pt20" :placeholder="placeholder" v-model="value"></textarea>
+		    <textarea class="fs-30 bg-white"
+            :placeholder="placeholder" 
+            :disabled="disabled" 
+            v-model="value"></textarea>
 		</div>
 	</div>
 </template>
@@ -11,7 +14,11 @@
     	props: {
     		title: String,
     		placeholder: String,
-    		value: String
+    		value: String,
+            disabled: {
+                type: Boolean,
+                default: false
+            }
     	}
     }
 </script>

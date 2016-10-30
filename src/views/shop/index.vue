@@ -1,12 +1,12 @@
 <template>
     <page-title title="商城"></page-title>
     <div class="page page-shop">
-        <ul class="overflow-hidden">
-            <li class="bb fl" v-for="item in 10">
+        <ul class="overflow-hidden" v-if="!$loadingRouteData">
+            <li class="bb fl" v-for="item of list">
                 <a class="tap-active" href="javascript:;">
-                    <img class="pt30" src="../../assets/pic_e@2x.png">
-                    <p class="fs-black pt30">太阳伞</p>
-                    <p class="fs-gray fs-26 pt10">点券数：<span class="fs-orange">100</span></p>
+                    <img class="pt30" :src="item.listImg|img">
+                    <p class="fs-black pt30">{{item.name}}</p>
+                    <p class="fs-gray fs-26 pt10">点券数：<span class="fs-orange">{{item.point}}</span></p>
                 </a>
             </li>
         </ul>
@@ -16,11 +16,34 @@
 <script>
     import PageTitle from 'components/PageTitle'
     import vFooter from 'components/Footer'
+
+    import http from 'lib/http'
+    import { loading, toast } from 'vx/actions'
     export default {
+        data() {
+            return {
+                list: []
+            }
+        },
         components: {
             vFooter,
             PageTitle
         },
+        route: {
+            data(transition) {
+                let query = transition.to.query;
+                return http.getData(this, 'goods/getGoods')
+                .then((list) => {
+                    this.$set('list', list);
+                });
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
+        }
     }
 </script>
 <style lang="less">

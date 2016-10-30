@@ -1,56 +1,60 @@
 import Promise from 'promise'
 import host from './hostConfig'
+let queryString  = require("querystring");
 module.exports = {
 	httpHost: host.httpHost,
 	imgHost: host.imgHost,
-	getDataList(self, url, param) {
+	querystring(param) {
+		return param ? ('?' + queryString.stringify(param)) : '';
+	},
+	getData(self, url, param) {
+		self.loading(true);
+		let data = this.querystring(param);
 	    return new Promise((resolve) => {
-	        self.$http.post(`${this.httpHost}${url}`, param || {})
+	        self.$http.get(`${this.httpHost}${url}${data}`)
 	        .then((res) => {
-	            var body = res.body;
-	            if(body.status) {
-	            	let currentPage = body.data.page;
-	            	let totalPage = body.data.total;
-	            	if(currentPage && totalPage) {
-	            		currentPage = Number(currentPage);
-	            		totalPage = Number(totalPage);
-	            		if(currentPage === totalPage) {
-	            			body.data.isLoadMoreEnd = true;
-	            		}
-	            		body.data.currentPage = currentPage;
-	            	}
-	                resolve(body.data);
-	            }else {
-	                self.loading(false);
-	                self.loadMoreBusy && (self.loadMoreBusy = false);
-	                self.toast(body.msg);
-	            }
+	            let body = res.body;	            
+	            (body.code == 1) ? resolve(body.data) : self.toast(body.msg);
+	            self.loading(false);
 	        })
 	        .catch(() => {
-	            self.loading(false);
-	            self.loadMoreBusy && (self.loadMoreBusy = false);
-	            self.toast('请求失败');
+	            this.error(self);
+	        })
+	    });
+	},
+	loadMore(self, url, param) {
+		if(self.loadMoreEnd) return;
+		self.loadMoreBusy = true;
+		let data = this.querystring(param);
+	    return new Promise((resolve) => {
+	        self.$http.get(`${this.httpHost}${url}${data}`)
+	        .then((res) => {
+	            let body = res.body;
+	            (body.code == 1) ? resolve(body.data) : self.toast(body.msg);
+	            self.loadMoreBusy = false;
+	        })
+	        .catch(() => {
+	        	this.error(self);
 	        })
 	    });
 	},
 	handle(self, url, param) {
+		self.loading(true);
 		return new Promise((resolve) => {
-			// self.loading(true);
 		    self.$http.post(`${this.httpHost}${url}`, param || {})
 		    .then((res) => {
-		        var body = res.body;
-		        // if(body.status) {
-		        // 	self.loading(false);
-		        //     resolve(body.data);
-		        // }else {
-		        //     self.loading(false);
-		        //     self.toast(body.msg);
-		        // }
+		        let body = res.body;
+		        (body.code == 1) ? resolve(body.data) : self.toast(body.msg);
+		        self.loading(false);
 		    })
 		    .catch(() => {
-		        // self.loading(false);
-		        self.toast('请求失败');
+		        this.error(self);
 		    })
 		});
+	},
+	error(self) {
+		self.loadMoreBusy = false;
+		self.loading(false);
+		self.toast('请求失败');
 	}
 }

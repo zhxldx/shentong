@@ -1,21 +1,21 @@
 <template>
     <page-title title="员工福利"></page-title>
-    <div class="page page-welfare">
+    <div class="page page-welfare" v-if="!$loadingRouteData">
         <ul>
-            <li class="bb" v-for="item in 10">
+            <li class="bb" v-for="item of list">
                 <div class="grid">
-                    <img src="../../assets/pic_a@2x.png">
+                    <img :src="item.listImg|img">
                     <div class="name">
-                        <p class="fs-black text-overflow">国内旅游一次国内旅游一次国内旅游一次</p>
+                        <p class="fs-black text-overflow">{{item.title}}</p>
                         <p class="fs-gray fs-26">
-                            积分数：<span class="fs-orange">1000</span>
+                            积分数：<span class="fs-orange">{{item.integral}}</span>
                         </p>
                     </div>
                     <div class="btn">
                         <a class="fs-white radius8"
                          href="javascript:;"
                          v-link="{path: '/welfare/detail'}">申请</a>
-                        <p class="fs-gray pt20 fs-24">剩余名额：10</p>
+                        <p class="fs-gray pt20 fs-24">剩余名额：{{item.remainNum}}</p>
                     </div>
                 </div>
             </li>
@@ -24,10 +24,32 @@
 </template>
 <script>
     import PageTitle from 'components/PageTitle'
+    import http from 'lib/http'
+    import { loading, toast } from 'vx/actions'
     export default {
+        data() {
+            return {
+                list: []
+            }
+        },
         components: {
             PageTitle
         },
+        route: {
+            data(transition) {
+                let query = transition.to.query;
+                return http.getData(this, 'welfare/getWelfares')
+                .then((list) => {
+                    this.$set('list', list);
+                });
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
+        }
     }
 </script>
 <style lang="less">

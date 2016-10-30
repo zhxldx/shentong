@@ -109,15 +109,25 @@ export default function(router) {
             }
         },
         // 日志／日报
-        '/note/day':{           
+        '/note/release/day':{           
             component: function(resolve){
                 require(['./views/note/release-day'],resolve);
             }
         },
         // 日志／周报
-        '/note/week':{           
+        '/note/release/week':{           
             component: function(resolve){
                 require(['./views/note/release-week'],resolve);
+            }
+        },
+        '/note/detail/day':{           
+            component: function(resolve){
+                require(['./views/note/detail-day'],resolve);
+            }
+        },
+        '/note/detail/week':{           
+            component: function(resolve){
+                require(['./views/note/detail-week'],resolve);
             }
         },
 

@@ -1,13 +1,16 @@
 <template>
     <page-title title="请假"></page-title>
     <div class="page page-leave">
-        <cell h="1.73333333rem" v-for="item in 15">
-            <div slot="title">
-                <p class="fs-black">请假标题</p>
-                <p class="fs-gray text-overflow fs-26">同意</p>
-            </div>
-            <span class="fs-gray fs-26" slot="value">07-11 09:00</span>
-        </cell>
+        <div v-if="!$loadingRouteData && list.length">
+            <cell h="1.73333333rem" v-for="item of list">
+                <div slot="title">
+                    <p class="fs-black">{{item.department}}</p>
+                    <p class="fs-gray text-overflow fs-26">{{item.status}}</p>
+                </div>
+                <span class="fs-gray fs-26" slot="value">{{item.createtime}}</span>
+            </cell>
+        </div>
+        <empty-tips v-if="!$loadingRouteData && !list.length"></empty-tips>
     </div>
     <div class="bottom bg-white bt">
       <btn link="/leave/ask">请 假</btn>
@@ -18,17 +21,38 @@
     import PageTitle from 'components/PageTitle'
     import Cell from 'components/Cell'
     import Btn from 'components/Btn'
+    import EmptyTips from 'components/EmptyTips'
+
+    import http from 'lib/http'
+    import { loading, toast } from 'vx/actions'
     export default {
-      data() {
-        return {
-          show: false,
-                value: ''
-        }
-      },
+        data() {
+            return {
+                list: []
+            }
+        },
         components: {
             PageTitle,
             Cell,
             Btn,
+            EmptyTips
+        },
+        route: {
+            data(transition) {
+                let query = transition.to.query;
+                return http.getData(this, 'leave/getLeaveInfo', {
+                    userId: 1
+                })
+                .then((list) => {
+                    this.$set('list', list);
+                });
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
         }
     }
 </script>

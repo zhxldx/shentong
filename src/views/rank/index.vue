@@ -2,37 +2,80 @@
     <page-title title="英雄榜"></page-title>
     <div class="tabs bb">
         <ul>
-            <li class="fs-30 active">
+            <li class="fs-30" :class="{'active': status==1}" @click="handleTab(1, rankList)">
                 <span>总排行</span>
             </li>
-            <li class="fs-30">
+            <li class="fs-30" :class="{'active': status==2}" @click="handleTab(2, rankListInDepartment)">
                 <span>部门排行</span>
             </li>
-            <li class="fs-30">
+            <li class="fs-30" :class="{'active': status==3}" @click="handleTab(3, departmentRank)">
                 <span>部门PK</span>
             </li>
         </ul>
     </div>
-    <div class="page page-rank">
+    <div class="page page-rank" v-if="!$loadingRouteData">
         <div class="rank-list pt20">
-            <table>
+            <table v-show="status==1">
                 <thead class="fs-white fs-28">
                     <tr>
                         <th><span>排名</span></th>
-                        <th><span>姓名</span></th>
+                        <th width="45%"><span>姓名</span></th>
                         <th><span>积分</span></th>
                         <th><span>职位</span></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in 15">
-                        <td class="fs-gray-plus fs-30">1</td>
-                        <td class="fs-black fs-30">
-                            <img src="../../assets/paihangbang_touxiang@3x.png">
-                            李大仁
+                    <tr v-for="item in rankList">
+                        <td class="fs-gray-plus fs-30">{{$index + 1}}</td>
+                        <td class="fs-black fs-30" style="text-align:left;">
+                            <img :src="item.headImg|img">
+                            {{item.name}}
                         </td>
-                        <td class="fs-gray fs-28">1000</td>
-                        <td class="fs-gray fs-28">商务经理</td>
+                        <td class="fs-gray fs-28">{{item.integral}}</td>
+                        <td class="fs-gray fs-28">{{item.position}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table v-show="status==2" v-if="500">
+                <thead class="fs-white fs-28">
+                    <tr>
+                        <th><span>排名</span></th>
+                        <th width="45%"><span>姓名</span></th>
+                        <th><span>积分</span></th>
+                        <th><span>职位</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in rankListInDepartment">
+                        <td class="fs-gray-plus fs-30">{{$index + 1}}</td>
+                        <td class="fs-black fs-30" style="text-align:left;">
+                            <img :src="item.headImg|img">
+                            {{item.name}}
+                        </td>
+                        <td class="fs-gray fs-28">{{item.integral}}</td>
+                        <td class="fs-gray fs-28">{{item.position}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table v-show="status==3" v-if="500">
+                <thead class="fs-white fs-28">
+                    <tr>
+                        <th><span>排名</span></th>
+                        <th><span>部门名称</span></th>
+                        <th><span>部门平均分</span></th>
+                        <th><span>人数</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in departmentRank">
+                        <td class="fs-gray-plus fs-30">{{$index + 1}}</td>
+                        <td class="fs-black fs-30">
+                            <img :src="item.headImg|img">
+                            {{item.name}}
+                        </td>
+                        <td class="fs-gray fs-28">{{item.integral}}</td>
+                        <td class="fs-gray fs-28">{{item.position}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -43,12 +86,61 @@
     import PageTitle from 'components/PageTitle'
     import vFooter from 'components/Footer'
     import Cell from 'components/Cell'
+
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
     export default {
+        data() {
+            return {
+                status: 1,
+                rankList: [],
+                rankListInDepartment: [],
+                departmentRank: []
+            }
+        },
         components: {
             PageTitle,
             vFooter,
             Cell
         },
+        methods: {
+            handleTab(status, list) {
+                this.status = status;
+                if(list.length) return;
+                switch(status) {
+                    case 2:
+                        http.getData(this, 'rank/getRank', {
+                            sort: 2
+                        })
+                        .then((list) => {
+                            this.$set('rankListInDepartment', list);
+                        });
+                        break;
+                    case 3: 
+                        http.getData(this, 'rank/getDepartmentRank')
+                        .then((list) => {
+                            this.$set('departmentRank', list);
+                        });
+                        break;
+                }
+            }
+        },
+        route: {
+            data() {
+                return http.getData(this, 'rank/getRank', {
+                    sort: 1
+                })
+                .then((list) => {
+                    this.$set('rankList', list);
+                });
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
+        }
     }
 </script>
 <style lang="less" scoped>
@@ -137,8 +229,10 @@
                     }
                     img {
                         .wh(.93333333rem);
+                        border-radius: 50%;
                         vertical-align: -.32rem; // 24px
-                        padding-right: .13333333rem; // 10px
+                        margin-left: 1.06666667rem; // 80px
+                        margin-right: .26666667rem; // 20px
                     }
                 }
             }

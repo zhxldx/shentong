@@ -3,23 +3,29 @@
     <page-title title="日志"></page-title>
     <div class="tabs bb">
         <ul>
-            <li class="fs-30 active">
+            <li class="fs-30" :class="{'active': type == 1}" @click="handleTab(1, '日报')">
                 <span>日报</span>
             </li>
-            <li class="fs-30">
+            <li class="fs-30" :class="{'active': type == 2}" @click="handleTab(2, '周报')">
                 <span>周报</span>
             </li>
         </ul>
     </div>
     <div class="page page-note">
-        <div class="note-list bt mt20">
-        	<cell h="2rem" :arrow="true" v-for="item in 10">
+        <div class="note-list bt mt20" v-if="!$loadingRouteData && list.length">
+        	<cell h="2rem" 
+            :arrow="true" 
+            :link="{path: detialLink, query: {diaryId: item.id}}"
+            v-for="item of list">
         		<div slot="title">
-        			<p class="fs-black text-overflow">货物送达益乐新村南区货物送达益乐新村南区</p>
-        			<p class="fs-gray">08-11  09:00</p>
+        			<p class="fs-black text-overflow">{{item.introduction}}</p>
+        			<p class="fs-gray">{{item.createtime}}</p>
         		</div>
         	</cell>
         </div>
+        <empty-tips v-if="!$loadingRouteData && !list.length"
+        :img="img"
+        :text="tips"></empty-tips>
     </div>
     <div class="bottom bg-white bt">
     	<btn @click="handleRelease">发布</btn>
@@ -29,10 +35,10 @@
 	    <div class="release-btn">
 	    	<a class="fs-black" 
             href="javascript:;"
-            @click="handleGoRelease('/note/day')">日 报</a>
+            @click="handleGoRelease('/note/release/day')">日 报</a>
 	    	<a class="fs-black" 
             href="javascript:;"
-            @click="handleGoRelease('/note/week')">周 报</a>
+            @click="handleGoRelease('/note/release/week')">周 报</a>
 	    </div>
 	    <a class="cancle fs-gray-plus bt fs-36" 
 	    href="javascript:;"
@@ -45,18 +51,27 @@
     import vFooter from 'components/Footer'
     import Cell from 'components/Cell'
     import Btn from 'components/Btn'
-    import { mask } from 'vx/actions'
+    import EmptyTips from 'components/EmptyTips'
+    import img from 'assets/wu_xiaoxi@2x.png';
+
+    import http from 'lib/http'
+    import { loading, toast, mask } from 'vx/actions'
     export default {
     	data() {
     		return {
-    			show: false
+    			show: false,
+                list: [],
+                type: 1,
+                tips: '',
+                img: img
     		}
     	},
         components: {
             PageTitle,
             vFooter,
             Cell,
-            Btn
+            Btn,
+            EmptyTips
         },
         methods: {
         	handleRelease() {
@@ -73,11 +88,39 @@
             handleGoRelease(link) {
                 this.handleCancle();
                 this.$router.go(link);
+            },
+            getList(type) {
+                let url = (type == 2) ? 'report/getWeekReport' : 'report/getDiary';
+                let tips = (type == 2) ? '暂无周报' : '暂无日报';
+                return http.getData(this, url, {
+                    userId: 1
+                })
+                .then((list) => {
+                    this.tips = tips;
+                    this.$set('list', list);
+                });
+            },
+            handleTab(type, tips) {
+                if(type == this.type) return;
+                this.type = type;
+                this.getList(type);
+            }
+        },
+        computed: {
+            detialLink() {
+                return (this.type == 1) ? '/note/detail/day' : '/note/detail/week';
+            }
+        },
+        route: {
+            data() {
+                return this.getList(1);
             }
         },
         vuex: {
             actions: {
-                mask
+                mask,
+                loading,
+                toast
             }
         }
     }
@@ -122,6 +165,7 @@
         }
     }
     .page-note {
+        display: flex;
         .note-list {
 			div[slot=title] p:first-of-type {
 				width: 5.6rem; // 420px

@@ -21,8 +21,8 @@
         methods: {
             handleClick() {
                 if(!this.verfiy()) {
-                    this.toast('请输入手机号');
-                    return;
+                    // this.toast('请输入手机号');
+                    // return;
                 }
                 if(this.disabled) return;
                 let time = this.time;
@@ -39,7 +39,10 @@
                     this.format(time);
                 }, 1000);
 
-                http.handle(this, 'user/checkPhone')
+                http.handle(this, 'welfare/applyWelfare', {
+                    userId: 1,
+                    welfareId: 1
+                })
                 .then(() => {
 
                 })

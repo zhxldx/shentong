@@ -1,43 +1,51 @@
 <template>
     <page-title title="我的消息"></page-title>
-    <div class="page user-message">
-        <div class="grid" v-infinite-scroll="loadMore()" infinite-scroll-disabled="loadMoreBusy" infinite-scroll-distance="100" infinite-scroll-immediate-check="false">
-            <ul>
-                <li v-for="item in list">
-                    <span class="date-time radius8 fs-white fs-24">2016-09-12 09:09</span>
-                    <div class="msg-card radius10 mt20 bd">
-                        <div class="title new fs-30">
-                            <p class="text-overflow fs-black">七部委启动第三批电子商务示范城市申报</p>
-                        </div>
-                        <a class="fs-gray fs-24" href="javascript:;">
-                            点击查看
-                        </a>
+    <div class="page user-message" 
+        infinite-scroll-distance="100" 
+        infinite-scroll-immediate-check="false"
+        infinite-scroll-disabled="loadMoreBusy" 
+        v-infinite-scroll="loadMore()">
+        <ul class="grid">
+            <li v-for="item in list">
+                <span class="date-time radius8 fs-white fs-24">2016-09-12 09:09</span>
+                <div class="msg-card radius10 mt20 bd">
+                    <div class="title new fs-30">
+                        <p class="text-overflow fs-black">七部委启动第三批电子商务示范城市申报</p>
                     </div>
-                </li>
-            </ul>
-        </div>
+                    <a class="fs-gray fs-24" href="javascript:;">
+                        点击查看
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <load-more v-lazy="500" v-show="loadMoreBusy"></load-more>
     </div>
     <v-footer></v-footer>
 </template>
 <script>
     import PageTitle from 'components/PageTitle'
+    import LoadMore from 'components/LoadMore'
     import vFooter from 'components/Footer'
-    import Cell from 'components/Cell'
     export default {
         data() {
             return {
-                list: [1,2,3,4,5,6,7,8,9],
+                list: 8,
                 loadMoreBusy: false
             }
         },
         components: {
-            vFooter,
             PageTitle,
-            Cell
+            LoadMore,
+            vFooter
         },
         methods: {
             loadMore() {
-                
+                this.loadMoreBusy = true;
+                $('.page').scrollTop($('.page').scrollTop() + 50);
+                setTimeout(() => {
+                    this.list += 5;
+                    this.loadMoreBusy = false;
+                },3000)
             },
             
         },

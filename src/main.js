@@ -8,6 +8,7 @@ import InfiniteScroll from 'vue-infinite-scroll'
 import 'vue-lazyload-img'
 import './lib/sprint.min.js'
 import routerConfig from './routers'
+import filters from './filters'
 import App from './App'
 
 Vue.use(Router);
@@ -22,8 +23,9 @@ Vue.use(Vue.lazyimg, {
 });
 
 Vue.config.devtools = true;
-FastClick.attach(document.body);
 Vue.http.options.emulateJSON = true;
+FastClick.attach(document.body);
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
 
 const router = new Router({
 	history: true,
