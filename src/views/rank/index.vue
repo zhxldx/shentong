@@ -71,11 +71,10 @@
                     <tr v-for="item in departmentRank">
                         <td class="fs-gray-plus fs-30">{{$index + 1}}</td>
                         <td class="fs-black fs-30">
-                            <img :src="item.headImg|img">
-                            {{item.name}}
+                            {{item.department}}
                         </td>
-                        <td class="fs-gray fs-28">{{item.integral}}</td>
-                        <td class="fs-gray fs-28">{{item.position}}</td>
+                        <td class="fs-gray fs-28">{{item.averageIntegral}}</td>
+                        <td class="fs-gray fs-28">{{item.totalPerson}}</td>
                     </tr>
                 </tbody>
             </table>

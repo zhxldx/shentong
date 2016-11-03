@@ -30,7 +30,16 @@ module.exports = {
 	        self.$http.get(`${this.httpHost}${url}${data}`)
 	        .then((res) => {
 	            let body = res.body;
-	            (body.code == 1) ? resolve(body.data) : self.toast(body.msg);
+	            if(body.code == 1) {
+	            	if(body.data.length) {
+	            		self.page = Number(body.page);
+	            		resolve(body.data);
+	            	}else {
+	            		self.loadMoreEnd = true
+	            	}
+	            }else {
+	            	self.toast(body.msg);
+	            }
 	            self.loadMoreBusy = false;
 	        })
 	        .catch(() => {

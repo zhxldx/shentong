@@ -1,6 +1,11 @@
 <template>
     <page-title title="员工福利"></page-title>
-    <div class="page page-welfare" v-if="!$loadingRouteData">
+    <div class="page page-welfare"
+    infinite-scroll-distance="100" 
+    infinite-scroll-immediate-check="false"
+    infinite-scroll-disabled="loadMoreBusy" 
+    v-infinite-scroll="loadMore()" 
+    v-if="!$loadingRouteData">
         <ul>
             <li class="bb" v-for="item of list">
                 <div class="grid">
@@ -20,25 +25,43 @@
                 </div>
             </li>
         </ul>
+        <load-more v-lazy="500" v-show="loadMoreBusy || loadMoreEnd" :load-more-end="loadMoreEnd"></load-more>
     </div>
 </template>
 <script>
     import PageTitle from 'components/PageTitle'
+    import LoadMore from 'components/LoadMore'
+    
     import http from 'lib/http'
     import { loading, toast } from 'vx/actions'
     export default {
         data() {
             return {
-                list: []
+                page: 1,
+                loadMoreBusy: false,
+                loadMoreEnd: false,
+                list: [],
             }
         },
         components: {
-            PageTitle
+            PageTitle,
+            LoadMore
+        },
+        methods: {
+            loadMore() {
+                http.loadMore(this, 'welfare/getWelfares', {
+                    page: this.page + 1
+                })
+                .then((list) => {
+                    this.list.push.apply(this.list, list);
+                });
+            }
         },
         route: {
-            data(transition) {
-                let query = transition.to.query;
-                return http.getData(this, 'welfare/getWelfares')
+            data() {
+                return http.getData(this, 'welfare/getWelfares', {
+                    page: 1
+                })
                 .then((list) => {
                     this.$set('list', list);
                 });

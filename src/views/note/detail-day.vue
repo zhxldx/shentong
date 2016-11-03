@@ -1,4 +1,3 @@
-
 <template>
     <page-title title="日报详情"></page-title>
     <div class="page page-note-detail" v-if="!$loadingRouteData">

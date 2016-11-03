@@ -2,9 +2,9 @@
     <page-title title="登陆"></page-title>
     <div class="page page-login">
     	<div class="grid mt50">
-            <v-input placeholder="手机号码" type="number"></v-input>
-            <v-input placeholder="输入密码" type="password"></v-input>
-            <btn class="btn">登录</btn>
+            <v-input placeholder="手机号码" type="tel" :value.sync="phone"></v-input>
+            <v-input placeholder="输入密码" type="password" :value.sync="password"></v-input>
+            <btn class="btn" @click="handleSubmit">登录</btn>
             <p class="fs-28">
                 <a class="fs-gray" 
                  href="javascript:;"
@@ -17,30 +17,55 @@
     </div>
 </template>
 <script>
-    import Cell from 'components/Cell'
     import vInput from 'components/Input'
     import PageTitle from 'components/PageTitle'
     import Btn from 'components/Btn'
-    import BtnCode from './btn-code'
+
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
+    import locache from 'lib/locache.js'
     export default {
     	data() {
     		return {
-    			pickerShow: false,
-    			department: '所在部门',
-    			departments: [1,2,3,5,6,7,8,9,10],
+    			phone: '',
+                password: ''
     		}
     	},
         components: {
             PageTitle,
             vInput,
             Btn,
-            BtnCode,
-            Cell
         },
         methods: {
-        	handlePick() {
-        		this.pickerShow = true;
-        	}
+        	handleSubmit() {
+        		if(!this.verification()) return;
+                http.handle(this, 'user/login', {
+                    account: this.phone,
+                    password: this.password
+                })
+                .then((userInfo) => {
+                    locache.set('STuserInfo', userInfo, 10000);
+                    this.toast('登录成功');
+                    this.$router.go('/');
+                });
+        	},
+            verification() {
+                if(this.phone == '') {
+                    this.toast('请输入手机号');
+                    return false;
+                }
+                if(this.password == '') {
+                    this.toast('请输入密码');
+                    return false;
+                }
+                return true;
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
         }
     }
 </script>

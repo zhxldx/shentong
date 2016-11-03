@@ -9,6 +9,7 @@ import 'vue-lazyload-img'
 import './lib/sprint.min.js'
 import routerConfig from './routers'
 import filters from './filters'
+import locache from 'lib/locache.js'
 import App from './App'
 
 Vue.use(Router);
@@ -32,6 +33,18 @@ const router = new Router({
 	linkActiveClass: 'v-link-active'
 });
 routerConfig(router);
-
+router.beforeEach((transition) => {
+	if(transition.to.auth) {
+		const userInfo = locache.get('STuserInfo');
+		if (!userInfo) {
+			router.replace('/login');
+			transition.next();	
+		}else{
+			transition.next();
+		}
+	}else {
+		transition.next();
+	}
+});
 router.start(App, '#app');
 

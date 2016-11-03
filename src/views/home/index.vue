@@ -5,11 +5,11 @@
             <div class="left-item fs-32">
                 <div class="integral">
                     <span>我的积分</span>
-                    <p>20000</p>
+                    <p>{{userInfo.integral}}</p>
                 </div>
                 <div class="coupon">
                     <span >我的点券</span>
-                    <p>20000</p>
+                    <p>{{userInfo.point}}</p>
                 </div>
             </div>
             <div class="right-item">
@@ -65,7 +65,13 @@
 <script>
     import PageTitle from 'components/PageTitle'
     import vFooter from 'components/Footer'
+    import locache from 'lib/locache.js'
     export default {
+        data() {
+            return {
+                userInfo: locache.get('STuserInfo')
+            }
+        },
         components: {
             vFooter,
             PageTitle

@@ -1,23 +1,28 @@
 <template>
     <page-title title="我的消息"></page-title>
-    <div class="page user-message" 
+    <div class="page page-message" 
         infinite-scroll-distance="100" 
         infinite-scroll-immediate-check="false"
         infinite-scroll-disabled="loadMoreBusy" 
         v-infinite-scroll="loadMore()">
-        <ul class="grid">
-            <li v-for="item in list">
-                <span class="date-time radius8 fs-white fs-24">2016-09-12 09:09</span>
+        <ul class="grid" v-if="!$loadingRouteData && list.length">
+            <li v-for="item of list">
+                <span class="date-time radius8 fs-white fs-24">{{item.createtime}}</span>
                 <div class="msg-card radius10 mt20 bd">
-                    <div class="title new fs-30">
-                        <p class="text-overflow fs-black">七部委启动第三批电子商务示范城市申报</p>
+                    <div class="title fs-30" :class="{'new': item.isNew}">
+                        <p class="text-overflow fs-black">{{item.title}}</p>
                     </div>
-                    <a class="fs-gray fs-24" href="javascript:;">
+                    <a class="fs-gray fs-24" 
+                    href="javascript:;"
+                    v-link="{path: '/message/detail', query: {id: item.id}}">
                         点击查看
                     </a>
                 </div>
             </li>
         </ul>
+        <empty-tips v-if="!$loadingRouteData && !list.length"
+        :img="img"
+        :text="tips"></empty-tips>
         <load-more v-lazy="500" v-show="loadMoreBusy"></load-more>
     </div>
     <v-footer></v-footer>
@@ -26,39 +31,61 @@
     import PageTitle from 'components/PageTitle'
     import LoadMore from 'components/LoadMore'
     import vFooter from 'components/Footer'
+    import EmptyTips from 'components/EmptyTips'
+    import img from 'assets/wuxiaoxi@2x.png';
+
+    import http from 'lib/http'
+    import { loading, toast } from 'vx/actions'
     export default {
         data() {
             return {
-                list: 8,
-                loadMoreBusy: false
+                list: [],
+                page: 1,
+                loadMoreBusy: false,
+                loadMoreEnd: false,
+                tips: '暂无消息',
+                img: img
             }
         },
         components: {
             PageTitle,
             LoadMore,
-            vFooter
+            vFooter,
+            EmptyTips
         },
         methods: {
             loadMore() {
-                this.loadMoreBusy = true;
-                $('.page').scrollTop($('.page').scrollTop() + 50);
-                setTimeout(() => {
-                    this.list += 5;
-                    this.loadMoreBusy = false;
-                },3000)
-            },
-            
+                http.loadMore(this, 'message/getMessage', {
+                    userId: 1,
+                    page: this.page + 1
+                })
+                .then((list) => {
+                    this.list.push.apply(this.list, list);
+                });
+            }
         },
-        computed: {
-            empty() {
-                return this.list.length ? true : false;
+        route: {
+            data() {
+                return http.getData(this, 'message/getMessage', {
+                    userId: 1,
+                    page: 1
+                })
+                .then((list) => {
+                    this.$set('list', list);
+                });
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
             }
         }
     }
 </script>
 <style lang="less">
     @import '~src/styles/mixin.less';
-    .user-message {
+    .page-message {
         li {
             display: flex;
             flex-direction: column;

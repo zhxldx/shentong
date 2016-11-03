@@ -2,7 +2,7 @@
     <page-title title="忘记密码"></page-title>
     <div class="page page-password">
         <div class="grid mt50">
-                <v-input placeholder="手机号码" type="number"></v-input>
+                <v-input placeholder="手机号码" type="tel"></v-input>
                 <div class="code-area">
                     <v-input w="6.26666667rem" placeholder="输入验证码"></v-input>
                     <btn-code></btn-code>

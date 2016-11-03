@@ -2,30 +2,30 @@
     <page-title title="注册"></page-title>
     <div class="page page-register">
         <div class="grid mt50">
-            <v-input placeholder="手机号码" type="number"></v-input>
+            <v-input placeholder="手机号码" type="tel" :value.sync="phone"></v-input>
             <div class="code-area">
-                <v-input w="6.26666667rem" placeholder="输入验证码"></v-input>
+                <v-input w="6.26666667rem" placeholder="输入验证码" :value.sync="code"></v-input>
                 <btn-code></btn-code>
             </div>
-            <v-input placeholder="姓名"></v-input>
-            <div class="departments-picker mt20 radius8 bd fs-gray" @click="handlePick">{{department}}</div>
-            <v-input placeholder="输入密码" type="password"></v-input>
-            <v-input placeholder="确认密码" type="password"></v-input>
-            <btn class="btn">注册</btn>
+            <v-input placeholder="姓名" :value.sync="name"></v-input>
+            <div class="departments-picker mt20 radius8 bd fs-gray" @click="handlePick">{{pickDepartmentName}}</div>
+            <v-input placeholder="输入密码" type="password" :value.sync="password"></v-input>
+            <v-input placeholder="确认密码" type="password" :value.sync="confirmPwd"></v-input>
+            <btn class="btn" @click="handleSubmit">注册</btn>
             <p class="notice fs-gray fs-26">审核时间为1-2个工作日</p>
         </div>
     </div>
-    <picker-modal title="选择部门" action-msg="完成" :show.sync="pickerShow">
+    <picker-modal title="选择部门" action-msg="完成" :show.sync="pickerShow" :init="pickerInit">
     	<div class="departments-picker-list">
     		<label v-for="item of departments" for="radio_{{$index}}">
-    			<cell h="1.13333333rem" title="部门名称">
+    			<cell h="1.13333333rem" :title="item.name">
     				<input 
     					id="radio_{{$index}}" 
     					type="radio" 
     					name="departments" 
     					slot="value" 
-    					:value="item" 
-    					v-model="department">
+    					:value="$index" 
+    					v-model="pickerIndex">
     			</cell>
     		</label>
     	</div>
@@ -43,9 +43,15 @@
     export default {
     	data() {
     		return {
+                pickerInit: false,
     			pickerShow: false,
-    			department: '所在部门',
-    			departments: [1,2,3,5,6,7,8,9,10],
+    			pickerIndex: 0,
+    			departments: [],
+                phone: '',
+                code: '',
+                name: '',
+                password: '',
+                confirmPwd: ''
     		}
     	},
         components: {
@@ -54,12 +60,72 @@
             Btn,
             BtnCode,
             Cell,
-            PickerModal
+            PickerModal,
         },
         methods: {
         	handlePick() {
-        		this.pickerShow = true;
-        	}
+        		if(this.departments.length) {
+                    this.pickerShow = true;
+                    this.pickerInit = true;
+                }else {
+                    http.getData(this, 'department/getDepartmentInfo')
+                    .then((departments) => {
+                        this.$set('departments', departments);
+                        this.pickerShow = true;
+                        this.pickerInit = true;
+                    });
+                }
+        	},
+            handleSubmit() {
+                if(!this.verification()) return;
+                http.handle(this, 'user/register', {
+                    phone: this.phone,
+                    name: this.name,
+                    department: this.pickDepartmentId,
+                    password: this.password
+                })
+                .then(() => {
+                    this.toast('注册成功');
+                    this.$router.go('/login');
+                })
+            },
+            verification() {
+                if(this.phone == '') {
+                    this.toast('请输入手机号');
+                    return false;
+                }
+                if(this.name == '') {
+                    this.toast('请输入姓名');
+                    return false;
+                }
+                if(!this.pickDepartmentId) {
+                    this.toast('请选择部门');
+                    return false;
+                }
+                if(this.password == '') {
+                    this.toast('请输入密码');
+                    return false;
+                }
+                if(this.confirmPwd == '') {
+                    this.toast('请确认密码');
+                    return false;
+                }
+                if(this.confirmPwd != this.password) {
+                    this.toast('两次输入密码不一致');
+                    return false;
+                }
+                return true;
+            }
+        },
+        computed: {
+            pickDepartmentName() {
+                var departments = this.departments;
+                return departments.length ? departments[this.pickerIndex].name : '所在部门'
+            },
+            pickDepartmentId() {
+                var departments = this.departments;
+                return departments.length ? departments[this.pickerIndex].id : false
+            }
         },
         vuex: {
             actions: {

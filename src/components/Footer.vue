@@ -3,7 +3,7 @@
         <ul>
             <li><a v-link="{path: '/', exact: true}" class="tap-active" href="javascript:;">首页</a></li>
             <li><a v-link="{path: '/shop', exact: true}" class="tap-active" href="javascript:;">商城</a></li>
-            <li><a v-link="{path: '/user/message', exact: true}" class="tap-active" href="javascript:;">消息</a></li>
+            <li><a v-link="{path: '/message', exact: true}" class="tap-active" href="javascript:;">消息</a></li>
             <li><a v-link="{path: '/user', exact: true}" class="tap-active" href="javascript:;">我的</a></li>
         </ul>
     </footer>

@@ -3,10 +3,10 @@
     <page-title title="日志"></page-title>
     <div class="tabs bb">
         <ul>
-            <li class="fs-30" :class="{'active': type == 1}" @click="handleTab(1, '日报')">
+            <li class="fs-30" :class="{'active': type == 1}" @click="handleTab(1)">
                 <span>日报</span>
             </li>
-            <li class="fs-30" :class="{'active': type == 2}" @click="handleTab(2, '周报')">
+            <li class="fs-30" :class="{'active': type == 2}" @click="handleTab(2)">
                 <span>周报</span>
             </li>
         </ul>
@@ -26,6 +26,7 @@
         <empty-tips v-if="!$loadingRouteData && !list.length"
         :img="img"
         :text="tips"></empty-tips>
+        <load-more v-lazy="500" v-show="loadMoreBusy || loadMoreEnd" :load-more-end="loadMoreEnd"></load-more>
     </div>
     <div class="bottom bg-white bt">
     	<btn @click="handleRelease">发布</btn>
@@ -52,6 +53,7 @@
     import Cell from 'components/Cell'
     import Btn from 'components/Btn'
     import EmptyTips from 'components/EmptyTips'
+    import LoadMore from 'components/LoadMore'
     import img from 'assets/wu_xiaoxi@2x.png';
 
     import http from 'lib/http'
@@ -63,7 +65,10 @@
                 list: [],
                 type: 1,
                 tips: '',
-                img: img
+                img: img,
+                page: 1,
+                loadMoreBusy: false,
+                loadMoreEnd: false,
     		}
     	},
         components: {
@@ -71,7 +76,8 @@
             vFooter,
             Cell,
             Btn,
-            EmptyTips
+            EmptyTips,
+            LoadMore
         },
         methods: {
         	handleRelease() {
@@ -89,26 +95,37 @@
                 this.handleCancle();
                 this.$router.go(link);
             },
-            getList(type) {
-                let url = (type == 2) ? 'report/getWeekReport' : 'report/getDiary';
-                let tips = (type == 2) ? '暂无周报' : '暂无日报';
-                return http.getData(this, url, {
-                    userId: 1
+            getList() {
+                return http.getData(this, this.httpUrl, {
+                    userId: 1,
+                    page: 1
                 })
                 .then((list) => {
-                    this.tips = tips;
+                    this.tips = (this.type == 2) ? '暂无周报' : '暂无日报';
                     this.$set('list', list);
                 });
             },
-            handleTab(type, tips) {
+            handleTab(type) {
                 if(type == this.type) return;
                 this.type = type;
-                this.getList(type);
+                this.getList();
+            },
+            loadMore() {
+                http.loadMore(this, this.httpUrl, {
+                    page: this.page + 1,
+                    userId: 1
+                })
+                .then((list) => {
+                    this.list.push.apply(this.list, list);
+                });
             }
         },
         computed: {
             detialLink() {
                 return (this.type == 1) ? '/note/detail/day' : '/note/detail/week';
+            },
+            httpUrl() {
+                return (this.type == 2) ? 'report/getWeekReport' : 'report/getDiary'
             }
         },
         route: {

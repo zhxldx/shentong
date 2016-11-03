@@ -2,35 +2,33 @@
 <template>
     <page-title title="发布日报"></page-title>
     <div class="page page-release">
+    <text-card
+        title="简介"
+        placeholder="请输入简介"
+        :value.sync="introduction"></text-card>
+
         <text-card
         title="已完成工作"
         placeholder="请输入已完成工作"
-        :value="value"></text-card>
+        :value.sync="finishedwork"></text-card>
 
         <text-card
         title="未完成工作"
         placeholder="请输入未完成工作"
-        :value="value"></text-card>
+        :value.sync="unfinishedwork"></text-card>
 
         <text-card
         title="遇到的问题"
         placeholder="请输入遇到的问题"
-        :value="value"></text-card>
+        :value.sync="problems"></text-card>
 
         <text-card
         title="备注"
         placeholder="请输入备注"
-        :value="value"></text-card>
-
-        <cell class="apply-person mt20 bt" h="2.66666667rem">
-            <div slot="title">
-                日志接收人
-                <i></i>
-            </div>
-        </cell>
+        :value.sync="remarks"></text-card>
     </div>
     <div class="bottom bg-white bt">
-    	<btn>提 交</btn>
+    	<btn @click="handleSubmit">提 交</btn>
     </div>
 	
 </template>
@@ -40,12 +38,19 @@
     import Cell from 'components/Cell'
     import Btn from 'components/Btn'
     import TextCard from './text-card'
-    import { mask } from 'vx/actions'
+
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
+    import locache from 'lib/locache.js'
     export default {
     	data() {
     		return {
-    			show: false,
-                value: ''
+    			introduction: '',
+                finishedwork: '',
+                unfinishedwork: '',
+                problems: '',
+                remarks: '',
+                userId: locache.get('STuserInfo').userId
     		}
     	},
         components: {
@@ -56,35 +61,53 @@
             TextCard
         },
         methods: {
-        	handleRelease() {
-        		this.show = true;
-        		this.mask(true);
-        		$('.mask').on('click', () => {
-        			this.handleCancle();
-        		});
-        	},
-        	handleCancle() {
-        		this.show = false;
-        		this.mask(false);
-        	}
+            handleSubmit() {
+                if(!this.verification()) return;
+                http.handle(this, 'report/publishDiary', {
+                    userId: this.userId,
+                    introduction: this.introduction,
+                    finishedwork: this.finishedwork,
+                    unfinishedwork: this.unfinishedwork,
+                    problems: this.problems,
+                    remarks: this.remarks
+                })
+                .then((userInfo) => {
+                    this.toast('发布成功');
+                    this.$router.go('/note');
+                });
+            },
+        	verification() {
+                if(this.introduction == '') {
+                    this.toast('请输入简介');
+                    return false;
+                }
+                if(this.finishedwork == '') {
+                    this.toast('请输入已完成工作');
+                    return false;
+                }
+                if(this.unfinishedwork == '') {
+                    this.toast('请输入未完成工作');
+                    return false;
+                }
+                if(this.problems == '') {
+                    this.toast('请输入遇到的问题');
+                    return false;
+                }
+                if(this.remarks == '') {
+                    this.toast('请输入备注');
+                    return false;
+                }
+                return true;
+            }
         },
         vuex: {
             actions: {
-                mask
+                loading,
+                toast
             }
         }
     }
 </script>
 <style lang="less">
     @import '~src/styles/mixin.less';
-    .page-release {
-        .apply-person {
-            div[slot=title] i{
-                display: block;
-                .wh(.8rem);
-                .background-img('rzjsr@2x.png');
-                margin-top: .33333333rem; // 25px 
-            }
-        }
-    }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="component-picker-modal" transition="slide" v-if="show">
+    <div class="component-picker-modal" transition="slide" v-if="init" v-show="show">
         <header class="bb">
             <span>{{title}}</span>
             <span @click="handleComplete">{{actionMsg}}</span>
@@ -19,6 +19,7 @@
                 twoWay: true,
                 type: Boolean
             },
+            init: false,
             title: String,
             actionMsg: String
         },
@@ -33,15 +34,18 @@
         methods: {
             handleComplete() {
                 this.show = false;
+                this.mask(false);
             }
         },
         watch: {
-            show(val) {
-                this.mask(val);
+            init(val) {
                 if(val) {
                     let scroll = $('.xs-container').height();
                     this.scrollHeight = scroll > 500 ? `${$(window).width()*500/750}px` : `${scroll}px`;
                 }
+            },
+            show(val) {
+                val && this.mask(true);
             }
         },
         vuex: {
@@ -52,6 +56,9 @@
         ready() {
             this.mask(this.show);
         },
+        destroyed() {
+            this.mask(false);
+        }
     }
 </script>
 <style lang="less">
