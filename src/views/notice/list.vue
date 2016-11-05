@@ -1,21 +1,61 @@
 <template>
-    <div class="m-list grid" v-for="item in 4" @click="toDetail('/notice/detail')">
-        <h1 class="title">七部委启动第三批电子商务示范城市申报工作</h1>
-        <p class="desc">中国证券网讯（记者 郭晓萍）记者31日从发改委网站获悉，国家发展改革委、商务部</p>
-        <div class="time">8-11 09:00</div>
+    <div class="m-list grid" v-for="item of list" v-link="{path: '/notice/detail', query: {id: item.id}}">
+        <h1 class="title">{{item.title}}</h1>
+        <p class="desc">{{item.introduction}}</p>
+        <div class="time">{{item.createtime}}</div>
     </div>
+    <empty-tips v-if="!$loadingRouteData && !list.length"
+        :img="img"
+        :text="tips"></empty-tips>
+    <load-more v-lazy="500" v-show="loadMoreBusy"></load-more>
 </template>
 
 <script>
+import http from 'lib/http'
+import LoadMore from 'components/LoadMore'
+import { loading, toast } from 'vx/actions'
+import EmptyTips from 'components/EmptyTips'
+
 export default {
   data () {
     return {
-
+        list: [],
+        page: 1,
+        loadMoreBusy: false,
+        loadMoreEnd: false
     };
+  },
+  components: {
+    LoadMore,
+    EmptyTips
+  },
+  route: {
+    data() {
+        return http.getData(this, 'notice/getNotices', {
+            page:1
+        })
+        .then((list) => {
+            this.$set('list', list);
+        });
+    }
   },
   methods: {
     toDetail(link) {
         this.$router.go(link);
+    },
+    loadMore() {
+        http.loadMore(this, 'notice/getNotices',{
+            page: this.page + 1
+        })
+        .then((list) => {
+            this.list.push(list);
+        })
+    }
+  },
+  vuex: {
+    actions: {
+        loading,
+        toast
     }
   }
 };

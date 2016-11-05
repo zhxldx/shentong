@@ -1,25 +1,43 @@
 <template>
     <v-article 
-        :title="title" 
-        :meta="meta" 
-        :content="content">
+        :title="detail.title" 
+        :meta="detail.createtime" 
+        :content="detail.introduction" 
+        v-if="!$loadingRouteData">
     </v-article>
 </template>
 
 <script>
+import http from 'lib/http'
+import { loading, toast } from 'vx/actions'
 import vArticle from 'components/Article'
 export default {
   
   data () {
     return {
-        title: '七部委启动第三批电子商务示范城市申报工作',
-        meta: '8-11 09:00',
-        content: '很多内容离开就是来的快放假了空间路上看到减肥路上看到减肥离开就是来的快放假老师打开减肥离开就是来的快放假'
+        detail: {}
     }
   },
   components: {
     vArticle
   },
+  route: {
+    data(transition) {
+        let query = transition.to.query;
+        return http.getData(this, 'notice/getNoticeDetail', {
+            noticeId: query.id
+        })
+        .then((detail) => {
+            this.$set('detail', detail)
+        })
+    }
+  },
+  vuex: {
+    actions: {
+        loading,
+        toast
+    }
+  }
 };
 </script>
 
