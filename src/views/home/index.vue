@@ -13,8 +13,12 @@
                 </div>
             </div>
             <div class="right-item">
-                <p><a href="javascript:;" class="fs-white">积分明细</a></p>
-                <p><a href="javascript:;" class="fs-orange radius8">去兑换</a></p>
+                <p><a href="javascript:;" 
+                class="fs-white"
+                v-link="'/user/integral'">积分明细</a></p>
+                <p><a href="javascript:;" 
+                class="fs-orange radius8"
+                v-link="'/shop'">去兑换</a></p>
             </div>
         </div>
 

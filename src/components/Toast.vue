@@ -29,5 +29,6 @@
         padding: .33333333rem; // 25px
         color: #fff;
         z-index: @zx999;
+        text-align: center;
     }
 </style>

@@ -11,11 +11,15 @@
             </li>
         </ul>
     </div>
-    <div class="page page-note">
+    <div class="page page-note"
+    infinite-scroll-distance="100" 
+    infinite-scroll-immediate-check="false"
+    infinite-scroll-disabled="loadMoreBusy" 
+    v-infinite-scroll="loadMore()">
         <div class="note-list bt mt20" v-if="!$loadingRouteData && list.length">
         	<cell h="2rem" 
             :arrow="true" 
-            :link="{path: detialLink, query: {diaryId: item.id}}"
+            :link="{path: detialLink, query: {id: item.diaryId || item.weekReportId}}"
             v-for="item of list">
         		<div slot="title">
         			<p class="fs-black text-overflow">{{item.introduction}}</p>
@@ -26,7 +30,7 @@
         <empty-tips v-if="!$loadingRouteData && !list.length"
         :img="img"
         :text="tips"></empty-tips>
-        <load-more v-lazy="500" v-show="loadMoreBusy || loadMoreEnd" :load-more-end="loadMoreEnd"></load-more>
+        <load-more v-lazy="500" v-show="loadMoreBusy"></load-more>
     </div>
     <div class="bottom bg-white bt">
     	<btn @click="handleRelease">发布</btn>
@@ -57,10 +61,12 @@
     import img from 'assets/wu_xiaoxi@2x.png';
 
     import http from 'lib/http'
+    import locache from 'lib/locache.js'
     import { loading, toast, mask } from 'vx/actions'
     export default {
     	data() {
     		return {
+                userId: locache.get('STuserInfo').userId,
     			show: false,
                 list: [],
                 type: 1,
@@ -97,7 +103,7 @@
             },
             getList() {
                 return http.getData(this, this.httpUrl, {
-                    userId: 1,
+                    userId: this.userId,
                     page: 1
                 })
                 .then((list) => {
@@ -113,7 +119,7 @@
             loadMore() {
                 http.loadMore(this, this.httpUrl, {
                     page: this.page + 1,
-                    userId: 1
+                    userId: this.userId
                 })
                 .then((list) => {
                     this.list.push.apply(this.list, list);

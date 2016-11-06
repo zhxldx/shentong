@@ -2,7 +2,7 @@
 	<cell class="user-item" h="2rem">
 		<img src="../../assets/pic_a@2x.png">
 		<div>
-			<p class="fs-32 fs-black">李大仁</p>
+			<p class="fs-32 fs-black">{{name}}</p>
 			<slot></slot>
 		</div>
 	</cell>
@@ -10,6 +10,9 @@
 <script>
 	import Cell from 'components/Cell'
 	export default {
+		props: {
+			name: String
+		},
 		components: {
 			Cell
 		}

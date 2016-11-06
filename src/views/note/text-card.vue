@@ -2,7 +2,7 @@
 	<div class="compoent-text-card-note bt bb mt20 bg-white">
 		<div class="grid fs-black pt20">
 			{{title}}
-		    <textarea class="fs-30 bg-white"
+		    <textarea class="fs-30 bg-white fs-gray"
             :placeholder="placeholder" 
             :disabled="disabled" 
             v-model="value"></textarea>

@@ -19,7 +19,7 @@
                     <div class="btn">
                         <a class="fs-white radius8"
                          href="javascript:;"
-                         v-link="{path: '/welfare/detail'}">申请</a>
+                         v-link="{path: '/welfare/detail', query: {id: item.id}}">申请</a>
                         <p class="fs-gray pt20 fs-24">剩余名额：{{item.remainNum}}</p>
                     </div>
                 </div>

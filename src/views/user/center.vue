@@ -15,13 +15,10 @@
             <cell title="我的履历" :arrow="true" link="/user/resume">
                 <img slot="title" src="../../assets/wode_lvli@3x.png">
             </cell>
-            <cell title="我的下属" :arrow="true" link="/user/subordinate">
-                <img slot="title" src="../../assets/wode_wdxs@3x.png">
-            </cell>
             <cell title="兑换记录" :arrow="true" link="/user/exchange">
                 <img slot="title" src="../../assets/wode_dhjl@3x.png">
             </cell>
-            <cell title="给领导打分" :arrow="true">
+            <cell title="给领导打分" :arrow="true" link="/user/leader">
                 <img slot="title" src="../../assets/wode_glddf@3x.png">
             </cell>
             <cell title="自助申请加分" :arrow="true" link="/addIntegral">

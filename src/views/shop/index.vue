@@ -3,7 +3,7 @@
     <div class="page page-shop">
         <ul class="overflow-hidden" v-if="!$loadingRouteData">
             <li class="bb fl" v-for="item of list">
-                <a class="tap-active" href="javascript:;">
+                <a class="tap-active" href="javascript:;" v-link="{path: '/shop/detail', query: {id: item.id}}">
                     <img class="pt30" :src="item.listImg|img">
                     <p class="fs-black pt30">{{item.name}}</p>
                     <p class="fs-gray fs-26 pt10">点券数：<span class="fs-orange">{{item.point}}</span></p>
@@ -53,8 +53,8 @@
             width: @body-w/2;
             height: 6.4rem; // 480px
             box-sizing: border-box;
-            &:nth-of-type(2n) {
-                border-left: solid 1px @bd-color;
+            &:nth-of-type(2n+1) {
+                border-right: solid 1px @bd-color;
             }
             a {
                 display: flex;

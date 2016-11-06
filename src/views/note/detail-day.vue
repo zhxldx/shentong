@@ -5,6 +5,11 @@
             <p class="fs-26 fs-gray pt10">{{list.createtime}}</p>
         </user-item>
         <text-card
+        title="简介"
+        :value="list.introduction"
+        :disabled="true"></text-card>
+
+        <text-card
         title="已完成工作"
         :value="list.finishedwork"
         :disabled="true"></text-card>
@@ -17,6 +22,11 @@
         <text-card
         title="遇到的问题"
         :value="list.problems"
+        :disabled="true"></text-card>
+
+        <text-card
+        title="备注"
+        :value="list.remarks"
         :disabled="true"></text-card>
     </div>
 </template>
@@ -42,7 +52,7 @@
             data(transition) {
                 let query = transition.to.query;
                 return http.getData(this, 'report/getDiaryDetail', {
-                    diaryId: query.diaryId
+                    diaryId: query.id
                 })
                 .then((list) => {
                     this.$set('list', list);

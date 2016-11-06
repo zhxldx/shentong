@@ -63,13 +63,16 @@
         methods: {
             handleSubmit() {
                 if(!this.verification()) return;
-                http.handle(this, 'report/publishDiary', {
+                let param = [{
                     userId: this.userId,
                     introduction: this.introduction,
                     finishedwork: this.finishedwork,
                     unfinishedwork: this.unfinishedwork,
                     problems: this.problems,
-                    remarks: this.remarks
+                    remark: this.remarks
+                }];
+                http.handle(this, 'report/publishDiary', {
+                    diaryReport: JSON.stringify(param)
                 })
                 .then((userInfo) => {
                     this.toast('发布成功');

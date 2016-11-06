@@ -4,6 +4,7 @@
         :type="type"
         v-model="value" 
         :style="{'width': w}" 
+        :disabled="disabled" 
     >
 </template>
 <script>
@@ -17,7 +18,8 @@
                 type: String,
                 default: 'text'
             },
-            w: String
+            w: String,
+            disabled: Boolean
         }
     }
 </script>

@@ -2,14 +2,14 @@
     <page-title title="忘记密码"></page-title>
     <div class="page page-password">
         <div class="grid mt50">
-                <v-input placeholder="手机号码" type="tel"></v-input>
+                <v-input placeholder="手机号码" type="tel" :value.sync="phone"></v-input>
                 <div class="code-area">
-                    <v-input w="6.26666667rem" placeholder="输入验证码"></v-input>
-                    <btn-code></btn-code>
+                    <v-input w="6.26666667rem" placeholder="输入验证码" :value.sync="code"></v-input>
+                    <btn-code :phone="phone"></btn-code>
                 </div>
-                <v-input placeholder="输入新密码" type="password"></v-input>
-                <v-input placeholder="确认密码" type="password"></v-input>
-                <btn class="btn">确认</btn>
+                <v-input placeholder="输入新密码" type="password" :value.sync="password"></v-input>
+                <v-input placeholder="确认密码" type="password" :value.sync="confirmPwd"></v-input>
+                <btn class="btn" @click="handleSubmit">确认</btn>
                 <p class="page-bottom fs-26">
                     <a class="fs-gray" href="">或通过服务电话</a>   
                 </p>
@@ -22,12 +22,17 @@
     import PageTitle from 'components/PageTitle'
     import Btn from 'components/Btn'
     import BtnCode from './btn-code'
+
+    import http from 'lib/http'
+    import utils from 'lib/utils'
+    import { loading,toast } from 'vx/actions'
     export default {
     	data() {
     		return {
-    			pickerShow: false,
-    			department: '所在部门',
-    			departments: [1,2,3,5,6,7,8,9,10],
+    			phone: '',
+                code: '',
+                password: '',
+                confirmPwd: ''
     		}
     	},
         components: {
@@ -38,9 +43,51 @@
             Cell
         },
         methods: {
-        	handlePick() {
-        		this.pickerShow = true;
-        	}
+        	handleSubmit() {
+                if(!this.verification()) return;
+                http.handle(this, 'user/forgetPassword', {
+                    phone: this.phone,
+                    password: this.password,
+                    verificationCode: this.code
+                })
+                .then(() => {
+                    this.toast('修改密码成功');
+                    this.$router.go('/login');
+                })
+            },
+            verification() {
+                if(this.phone == '') {
+                    this.toast('请输入手机号');
+                    return false;
+                }
+                if(!utils.phoneVerfiy(this.phone)) {
+                    this.toast('请输入正确的手机号');
+                    return false;
+                }
+                if(this.code == '') {
+                    this.toast('请输入验证码');
+                    return false;
+                }
+                if(this.password == '') {
+                    this.toast('请输入密码');
+                    return false;
+                }
+                if(this.confirmPwd == '') {
+                    this.toast('请确认密码');
+                    return false;
+                }
+                if(this.confirmPwd != this.password) {
+                    this.toast('两次输入密码不一致');
+                    return false;
+                }
+                return true;
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
         }
     }
 </script>

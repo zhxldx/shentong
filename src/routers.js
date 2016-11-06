@@ -32,6 +32,12 @@ export default function(router) {
             },
             auth: true
         },
+        '/shop/detail':{           
+            component: function(resolve){
+                require(['./views/shop/detail'],resolve);
+            },
+            auth: true
+        },
 
         // 用户中心／我的
         '/user':{           
@@ -65,6 +71,19 @@ export default function(router) {
         '/user/exchange':{           
             component: function(resolve){
                 require(['./views/user/exchange-record'],resolve);
+            },
+            auth: true
+        },
+
+        '/user/leader':{           
+            component: function(resolve){
+                require(['./views/user/leader'],resolve);
+            },
+            auth: true
+        },
+        '/user/leaderScore':{           
+            component: function(resolve){
+                require(['./views/user/leader-score'],resolve);
             },
             auth: true
         },

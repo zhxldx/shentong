@@ -6,6 +6,11 @@
             <p class="fs-26 fs-gray pt10">{{list.createtime}}</p>
         </user-item>
         <text-card
+        title="简介"
+        :value="list.introduction"
+        :disabled="true"></text-card>
+        
+        <text-card
         title="本周完成工作"
         :value="list.finishedwork"
         :disabled="true"></text-card>
@@ -51,7 +56,7 @@
             data(transition) {
                 let query = transition.to.query;
                 return http.getData(this, 'report/getWeekReportDetail', {
-                    diaryId: query.diaryId
+                    diaryId: query.id
                 })
                 .then((list) => {
                     this.$set('list', list);

@@ -6,6 +6,7 @@
 </template>
 <script>
     import http from 'lib/http'
+    import utils from 'lib/utils'
     import { loading,toast } from 'vx/actions'
     export default {
         props: {
@@ -20,11 +21,28 @@
         },
         methods: {
             handleClick() {
-                if(!this.verfiy()) {
-                    // this.toast('请输入手机号');
-                    // return;
-                }
+                if(!this.verification()) return;
                 if(this.disabled) return;
+                http.handle(this, 'user/sendVericationCode', {
+                    phone: this.phone
+                })
+                .then(() => {
+                    this.toast('发送成功');
+                    this.cutdownTime();
+                });
+            },
+            verification() {
+                if(!this.phone) {
+                    this.toast('请输入手机号');
+                    return false;
+                }
+                if(!utils.phoneVerfiy(this.phone)) {
+                    this.toast('请输入正确的手机号');
+                    return false;
+                }
+                return true;
+            },
+            cutdownTime() {
                 let time = this.time;
                 this.disabled = true;
                 this.format(time);
@@ -38,25 +56,12 @@
                     }
                     this.format(time);
                 }, 1000);
-
-                http.handle(this, 'welfare/applyWelfare', {
-                    userId: 1,
-                    welfareId: 1
-                })
-                .then(() => {
-
-                })
             },
             format(time) {
                 if(time > 0) {
                     this.content = `已发送 (${time}s)`;
                 }else {
                     this.content = '获取验证码';
-                }
-            },
-            verfiy() {
-                if(this.phone) {
-                    return true;
                 }
             }
         },

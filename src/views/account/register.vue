@@ -5,7 +5,7 @@
             <v-input placeholder="手机号码" type="tel" :value.sync="phone"></v-input>
             <div class="code-area">
                 <v-input w="6.26666667rem" placeholder="输入验证码" :value.sync="code"></v-input>
-                <btn-code></btn-code>
+                <btn-code :phone="phone"></btn-code>
             </div>
             <v-input placeholder="姓名" :value.sync="name"></v-input>
             <div class="departments-picker mt20 radius8 bd fs-gray" @click="handlePick">{{pickDepartmentName}}</div>
@@ -39,6 +39,7 @@
     import PickerModal from 'components/PickerModal'
     import BtnCode from './btn-code'
     import http from 'lib/http'
+    import utils from 'lib/utils'
     import { loading,toast } from 'vx/actions'
     export default {
     	data() {
@@ -51,7 +52,7 @@
                 code: '',
                 name: '',
                 password: '',
-                confirmPwd: ''
+                confirmPwd: '',
     		}
     	},
         components: {
@@ -82,7 +83,8 @@
                     phone: this.phone,
                     name: this.name,
                     department: this.pickDepartmentId,
-                    password: this.password
+                    password: this.password,
+                    verificationCode: this.code
                 })
                 .then(() => {
                     this.toast('注册成功');
@@ -92,6 +94,14 @@
             verification() {
                 if(this.phone == '') {
                     this.toast('请输入手机号');
+                    return false;
+                }
+                if(!utils.phoneVerfiy(this.phone)) {
+                    this.toast('请输入正确的手机号');
+                    return false;
+                }
+                if(this.code == '') {
+                    this.toast('请输入验证码');
                     return false;
                 }
                 if(this.name == '') {

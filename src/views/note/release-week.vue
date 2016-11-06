@@ -3,39 +3,44 @@
     <page-title title="发布周报"></page-title>
     <div class="page page-release">
         <text-card
+        title="简介"
+        placeholder="请输入简介"
+        :value.sync="introduction"></text-card>
+
+        <text-card
         title="本周完成工作"
         placeholder="请输入本周完成工作"
-        :value="value"></text-card>
+        :value.sync="finishedwork"></text-card>
 
         <text-card
         title="本周工作总结"
         placeholder="请输入本周工作总结"
-        :value="value"></text-card>
+        :value.sync="summary"></text-card>
 
         <text-card
         title="下周工作计划"
         placeholder="请输入下周工作计划"
-        :value="value"></text-card>
+        :value.sync="nextweekplan"></text-card>
             
         <text-card
         title="遇到的问题"
         placeholder="请输入遇到的问题"
-        :value="value"></text-card>
+        :value.sync="problems"></text-card>
 
-        <text-card
+        <!-- <text-card
         title="备注"
         placeholder="请输入备注"
-        :value="value"></text-card>
+        :value.sync="introduction"></text-card> -->
 
-        <cell class="apply-person mt20 bt" h="2.66666667rem">
+        <!-- <cell class="apply-person mt20 bt" h="2.66666667rem">
             <div slot="title">
                 日志接收人
                 <i></i>
             </div>
-        </cell>
+        </cell> -->
     </div>
     <div class="bottom bg-white bt">
-    	<btn>提 交</btn>
+    	<btn @click="handleSubmit">提 交</btn>
     </div>
 	
 </template>
@@ -45,12 +50,19 @@
     import Cell from 'components/Cell'
     import Btn from 'components/Btn'
     import TextCard from './text-card'
-    import { mask } from 'vx/actions'
+    
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
+    import locache from 'lib/locache.js'
     export default {
     	data() {
     		return {
-    			show: false,
-                value: ''
+    			introduction: '',
+                finishedwork: '',
+                summary: '',
+                problems: '',
+                nextweekplan: '',
+                userId: locache.get('STuserInfo').userId
     		}
     	},
         components: {
@@ -61,21 +73,52 @@
             TextCard
         },
         methods: {
-        	handleRelease() {
-        		this.show = true;
-        		this.mask(true);
-        		$('.mask').on('click', () => {
-        			this.handleCancle();
-        		});
-        	},
-        	handleCancle() {
-        		this.show = false;
-        		this.mask(false);
-        	}
+        	handleSubmit() {
+                if(!this.verification()) return;
+                let param = [{
+                    userId: this.userId,
+                    introduction: this.introduction,
+                    finishedwork: this.finishedwork,
+                    summary: this.summary,
+                    problems: this.problems,
+                    nextweekplan: this.nextweekplan
+                }];
+                http.handle(this, 'report/publishWeekReport', {
+                    weekReport: JSON.stringify(param)
+                })
+                .then((userInfo) => {
+                    this.toast('发布成功');
+                    this.$router.go('/note');
+                });
+            },
+            verification() {
+                if(this.introduction == '') {
+                    this.toast('请输入简介');
+                    return false;
+                }
+                if(this.finishedwork == '') {
+                    this.toast('请输入本周完成工作');
+                    return false;
+                }
+                if(this.summary == '') {
+                    this.toast('summary');
+                    return false;
+                }
+                if(this.nextweekplan == '') {
+                    this.toast('请输入下周工作计划');
+                    return false;
+                }
+                if(this.problem == '') {
+                    this.toast('请输入遇到的问题');
+                    return false;
+                }
+                return true;
+            }
         },
         vuex: {
             actions: {
-                mask
+                loading,
+                toast
             }
         }
     }

@@ -6,15 +6,14 @@
         infinite-scroll-disabled="loadMoreBusy" 
         v-infinite-scroll="loadMore()">
         <ul class="grid" v-if="!$loadingRouteData && list.length">
-            <li v-for="item of list">
+            <li v-for="item of list" @click="goDetail(item.id)">
                 <span class="date-time radius8 fs-white fs-24">{{item.createtime}}</span>
                 <div class="msg-card radius10 mt20 bd">
                     <div class="title fs-30" :class="{'new': item.isNew}">
                         <p class="text-overflow fs-black">{{item.title}}</p>
                     </div>
                     <a class="fs-gray fs-24" 
-                    href="javascript:;"
-                    v-link="{path: '/message/detail', query: {id: item.id}}">
+                    href="javascript:;">
                         点击查看
                     </a>
                 </div>
@@ -35,10 +34,12 @@
     import img from 'assets/wuxiaoxi@2x.png';
 
     import http from 'lib/http'
+    import locache from 'lib/locache'
     import { loading, toast } from 'vx/actions'
     export default {
         data() {
             return {
+                userId: locache.get('STuserInfo').userId,
                 list: [],
                 page: 1,
                 loadMoreBusy: false,
@@ -56,12 +57,15 @@
         methods: {
             loadMore() {
                 http.loadMore(this, 'message/getMessage', {
-                    userId: 1,
+                    userId: this.userId,
                     page: this.page + 1
                 })
                 .then((list) => {
                     this.list.push.apply(this.list, list);
                 });
+            },
+            goDetail(id) {
+                this.$router.go({path: '/message/detail', query: {id: id}});
             }
         },
         route: {

@@ -1,13 +1,17 @@
 <template>
     <page-title title="发布日报"></page-title>
     <div class="page page-leave">
-        <cell title="开始时间" value="2016-07-07 10:00:00" :arrow="true"></cell>
-        <cell title="结束时间" value="2016-07-08 10:00:00" :arrow="true"></cell>
-        <cell title="请假天数" value="2天"></cell>
+        <input id="j-start-time" type="date" v-model="startTime">
+        <input id="j-end-time" type="date" v-model="endTime">
+        <cell @click="startHandler" title="开始时间" :value="startTime" :arrow="true"></cell>
+        <cell @click="endHandler" title="结束时间" :value="endTime" :arrow="true"></cell>
+        <cell title="请假天数">
+            <span slot="value">{{dayNumber}}天</span>
+        </cell>
         <text-card
         title="请假理由"
         placeholder="请输入请假理由"
-        :value="value"></text-card>
+        :value.sync="reason"></text-card>
         <cell class="apply-person mt20" h="2.66666667rem">
             <div slot="title">
                 审批人
@@ -16,7 +20,7 @@
         </cell>
     </div>
     <div class="bottom bg-white bt">
-        <btn>提 交</btn>
+        <btn @click="handleSubmit">提 交</btn>
     </div>
     
 </template>
@@ -25,13 +29,22 @@
     import Cell from 'components/Cell'
     import Btn from 'components/Btn'
     import TextCard from '../note/text-card'
+
+    import http from 'lib/http'
+    import { loading,toast } from 'vx/actions'
+    import locache from 'lib/locache.js'
     import { mask } from 'vx/actions'
     export default {
         data() {
             return {
-                show: false,
-                value: ''
+                userId: locache.get('STuserInfo').userId,
+                startTime: '选择开始时间',
+                endTime: '选择结束时间',
+                reason: ''
             }
+        },
+        ready() {
+            console.log();
         },
         components: {
             PageTitle,
@@ -40,21 +53,70 @@
             TextCard
         },
         methods: {
-            handleRelease() {
-                this.show = true;
-                this.mask(true);
-                $('.mask').on('click', () => {
-                    this.handleCancle();
+            simulationClick(selecter) {
+                var elem = document.getElementById(selecter);
+                if (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+                    elem.focus();
+                }else {
+                    elem.click();
+                }
+            },
+            startHandler() {
+                this.simulationClick('j-start-time');
+            },
+            endHandler() {
+                this.simulationClick('j-end-time');
+            },
+            handleSubmit() {
+                if(!this.verification()) return;
+                let param = [{
+                    userId: this.userId,
+                    starttime: this.startTime,
+                    endtime: this.endTime,
+                    days: this.dayNumber,
+                    reason: this.reason,
+                    superiorUserId: 1
+                }];
+                // alert(JSON.stringify(param))
+                http.handle(this, 'leave/askLeave', {
+                    leave: JSON.stringify(param)
+                })
+                .then((userInfo) => {
+                    this.toast('请假成功');
+                    this.$router.go('/leave');
                 });
             },
-            handleCancle() {
-                this.show = false;
-                this.mask(false);
+            verification() {
+                if(!this.dayNumber) {
+                    this.toast('请选择正确的请假时间');
+                    return false;
+                }
+                if(this.reason == '') {
+                    this.toast('请输入申请理由');
+                    return false;
+                }
+                return true;
+            }
+        },
+        computed: {
+            dayNumber() {
+                var timeString = new Date(this.endTime) - new Date(this.startTime);
+                if(isNaN(timeString) || timeString <= 0) {
+                    return 0;
+                }
+                return (timeString/60/60/24/1000);
+            }
+        },
+        filters: {
+            format(val) {
+                val = val.replace('T', ' ');
+                return val.split('.')[0];
             }
         },
         vuex: {
             actions: {
-                mask
+                loading,
+                toast
             }
         }
     }
@@ -81,6 +143,12 @@
                 .background-img('rzjsr@2x.png');
                 margin-top: .33333333rem; // 25px 
             }
+        }
+        #j-start-time, #j-end-time {
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            top: -100%;
         }
     }
 </style>
