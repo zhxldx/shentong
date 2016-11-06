@@ -1,12 +1,16 @@
 <template>
-    <div class="m-list grid" v-for="item of list" v-link="{path: '/notice/detail', query: {id: item.id}}">
-        <h1 class="title">{{item.title}}</h1>
-        <p class="desc">{{item.introduction}}</p>
-        <div class="time">{{item.createtime}}</div>
+    <div
+    infinite-scroll-distance="100" 
+    infinite-scroll-immediate-check="false"
+    infinite-scroll-disabled="loadMoreBusy" 
+    v-infinite-scroll="loadMore()">
+        <div class="m-list grid" v-for="item of list" v-link="{path: '/notice/detail', query: {id: item.id}}">
+            <h1 class="title">{{item.title}}</h1>
+            <p class="desc">{{item.introduction}}</p>
+            <div class="time">{{item.createtime}}</div>
+        </div>
     </div>
-    <empty-tips v-if="!$loadingRouteData && !list.length"
-        :img="img"
-        :text="tips"></empty-tips>
+    <empty-tips v-if="!$loadingRouteData && !list.length"></empty-tips>
     <load-more v-lazy="500" v-show="loadMoreBusy"></load-more>
 </template>
 

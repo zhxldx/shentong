@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="tap-active" href="javascript:;">
+                    <a class="tap-active" href="javascript:;" v-link="'/notice'">
                         <img src="../../assets/icon_gonggao@3x.png">公告
                     </a>
                 </li>
