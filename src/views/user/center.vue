@@ -3,7 +3,8 @@
     <div class="page page-user-center">
         <div class="head">
             <div class="head-img">
-                <img src="../../assets/wode_touxiang.png">
+                <img v-touch:tap="handleClick" :src="head || headImg || defaultImg">
+                <input id="head-img" type="file" @change="handleChange($event)">
             </div>
             <p class="name fs-white pt20">李大仁</p>
             <p class="positon fs-white pt10">商务经理</p>
@@ -36,18 +37,80 @@
     import PageTitle from 'components/PageTitle'
     import vFooter from 'components/Footer'
     import Cell from 'components/Cell'
+
+    import CanvasUpload from 'src/lib/upload'
+    import http from 'lib/http'
+    import locache from 'lib/locache.js'
+    import { loading, toast } from 'vx/actions'
+    import defaultImg from 'assets/wode_touxiang.png'
     export default {
+        data() {
+            return {
+                userInfo: locache.get('STuserInfo'),
+                defaultImg: defaultImg,
+                head: null
+            }
+        },
         components: {
             PageTitle,
             vFooter,
-            
             Cell
         },
+        computed: {
+            headImg() {
+                let headImg = this.userInfo.headImg;
+                if(headImg) {
+                    return http.imgHost + headImg;
+                }
+                return false;
+            }
+        },
+        methods: {
+            handleChange(event) {
+                var el = event.target;
+                var self = this;
+                if(el.files && el.files[0]){
+                    CanvasUpload(el, {
+                        uploading: function(){
+                            self.loading(true);
+                        },
+                        complete: function(data){
+                            self.head = data;
+                            let base64 = data.split('base64,')[1];
+                            http.handle(self, 'user/upLoadHeadImg', {
+                                userId: self.userInfo.userId,
+                                headImg: base64
+                            })
+                            .then((headImg) => {
+                                http.refreshUserInfo(self, self.userInfo.userId, locache);
+                                // self.headImg = http.imgHost + headImg.imgPath;
+                            })
+                        },
+                        error(msg) {
+                            self.loading(false);
+                            self.toast(msg);
+                        }
+                    });
+                }
+            },
+            handleClick() {
+                document.getElementById('head-img').click();
+            }
+        },
+        vuex: {
+            actions: {
+                loading,
+                toast
+            }
+        }
     }
 </script>
 <style lang="less">
     @import '~src/styles/mixin.less';
     .page-user-center {
+        #head-img {
+            display: none;
+        }
         .head {
             height: 4.26666667rem; // 320px
             .background-img('wode_bg@3x.png');

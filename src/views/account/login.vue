@@ -22,6 +22,7 @@
     import Btn from 'components/Btn'
 
     import http from 'lib/http'
+    import utils from 'lib/utils'
     import { loading,toast } from 'vx/actions'
     import locache from 'lib/locache.js'
     export default {
@@ -56,6 +57,10 @@
                 }
                 if(this.password == '') {
                     this.toast('请输入密码');
+                    return false;
+                }
+                if(!utils.phoneVerfiy(this.phone)) {
+                    this.toast('请输入正确的手机号');
                     return false;
                 }
                 return true;

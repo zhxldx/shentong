@@ -46,26 +46,27 @@
                 }
                 if(this.btnText =='提交打分') {
                     this.handleSubmit();
+                }else {
+                    if(this.list.length - 2 == this.currentIndex) {
+                        this.btnText = '提交打分';
+                    }
+                    this.currentIndex += 1;
+                    switch (this.currentAswer) {
+                        case '非常好':
+                            this.totalPoint += 100;
+                            break;
+                        case '好':
+                            this.totalPoint += 80;
+                            break;
+                        case '一般':
+                            this.totalPoint += 60;
+                            break;
+                        case '较差':
+                            this.totalPoint += 40;
+                            break;
+                    }
+                    this.currentAswer = '';
                 }
-                if(this.list.length - 2 == this.currentIndex) {
-                    this.btnText = '提交打分'
-                }
-                this.currentIndex += 1;
-                switch (this.currentAswer) {
-                    case '非常好':
-                        this.totalPoint += 100;
-                        break;
-                    case '好':
-                        this.totalPoint += 80;
-                        break;
-                    case '一般':
-                        this.totalPoint += 60;
-                        break;
-                    case '较差':
-                        this.totalPoint += 40;
-                        break;
-                }
-                this.currentAswer = '';
             },
             handleSubmit() {
                 let param = [{
@@ -84,9 +85,8 @@
         },
         computed: {
             currentData() {
-                if(this.list.length - 1 == this.currentIndex) return;
                 let list = this.list[this.currentIndex];
-                list.questionItems = list.questionItems.split('，');
+                list && (list.questionItems = list.questionItems.split('，'));
                 return list;
             }
         },

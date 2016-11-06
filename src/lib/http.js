@@ -61,6 +61,20 @@ module.exports = {
 		    })
 		});
 	},
+	refreshUserInfo(self, userId, locache) {
+		return new Promise((resolve) => {
+			let data = this.querystring({
+				userId: userId
+			});
+	        self.$http.get(`${this.httpHost}user/getUserInfo${data}`)
+	        .then((res) => {
+	            let body = res.body;
+	            if(body.code == 1) {
+	            	locache.set('STuserInfo', body.data, 10000);
+	            }	            
+	        })
+	    });
+	},
 	error(self) {
 		self.loadMoreBusy = false;
 		self.loading(false);
