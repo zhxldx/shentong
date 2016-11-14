@@ -1,6 +1,6 @@
 <template>
 <ul class="comments page">
-    <li v-for="comment in comments">
+    <li v-for="comment of comments">
         <div class="comment">
             <div class="comment-head">
                 <div class="avatar">
@@ -24,43 +24,59 @@
 </template>
 
 <script>
+import http from 'lib/http'
+import {loading, toast} from 'vx/actions'
 import avatar from 'assets/paihangbang_touxiang@2x.png'
 import vInput from 'components/Input'
 export default {
   data () {
     return {
-        comments:[
-            {
-                avatar: avatar,
-                realName: '李大仁',
-                addTime: '8-11 09:00',
-                comment: '善良的上课困了睡觉肯定疯了空间感动了空间舍得离开就是对方'
-            },
-            {
-                avatar: avatar,
-                realName: '李大仁',
-                addTime: '8-11 09:00',
-                comment: '善良的上课困了睡觉肯定疯了空间感动了空间舍得离开就是对方'
-            }
-        ],
-        value: ''
+        comments:[],
+        value: '',
+        page: 1,
+        newsId:0
     };
   },
   components: {
     vInput,
     avatar
   },
+  route: {
+    data(transition) {
+        let query = transition.to.query;
+        this.$set('newsId', query.newsId);
+        return http.getData(this, 'news/getNewsComment', {
+            newsId: query.newsId,
+            page: 1
+        })
+        .then((comments) => {
+            this.$set('comments', comments)
+        })
+    }
+  },
   methods: {
     addComment() {
         let c = this.value;
-        this.comments.push(
-            {
-                avatar: avatar,
-                realName: '李大仁',
-                addTime: '8-11 09:00',
-                comment: c
-            }
-        )
+        let user = locache.get('STuserInfo');
+        let comment = {
+            userId: user.userId,
+            headImg: user.headImg,
+            newsId: this.$get('newsId'),
+            content: c
+        }
+        http.handle(this, 'news/comment', {
+            newsComments: comment
+        })
+        .then(() => {
+            // reload
+            this.comments.push( comment )
+        })
+    }
+  },
+  vuex: {
+    actions: {
+        loading,
+        toast
     }
   }
 };

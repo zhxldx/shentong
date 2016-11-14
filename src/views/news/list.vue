@@ -1,19 +1,48 @@
 <template>
-    <div class="l-cell grid" v-for="item in 5">
-        <img  src="../../assets/pic@2x.png" alt="">
+    <div class="l-cell grid" v-for="item of list" v-link="{path: '/news/detail', query: {id: item.id}}">
+        <img :src="item.listImg" alt="">
         <div class="l-text">
-            <p class="l-title">七部委启动第三批电子商务示范城市</p>
-            <div class="l-time">8-11 09:00</div>
+            <p class="l-title">{{item.title}}</p>
+            <div class="l-time">{{item.createtime}}</div>
         </div>
     </div>
 </template>
 
 <script>
+import http from 'lib/http'
+import LoadMore from 'components/LoadMore'
+import { loading, toast } from 'vx/actions'
 export default {
   data () {
     return {
-
+        list: [],
+        page: 1,
+        loadMoreBusy: false,
+        loadMoreEnd: false
     };
+  },
+  components: {
+    LoadMore
+  },
+  route: {
+    data() {
+        return http.getData(this, 'news/getNews', {
+            page: 1
+        })
+        .then((list) => {
+            list.forEach((news)=>{
+                news.listImg = http.imgHost + news.listImg;
+                return news;
+            })
+            this.$set('list', list)
+        })
+    }
+  },
+  vuex: {
+    actions: {
+        loading,
+        toast
+    }
   }
 };
 </script>

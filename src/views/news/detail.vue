@@ -1,15 +1,15 @@
 <template>
     <v-article 
-        :title="title" 
-        :meta="meta" 
-        :content="content">
+        :title="news.title" 
+        :meta="news.createtime" 
+        :content="news.content">
     </v-article>
     <div class="btn-container">
-        <div class="fav">
+        <div class="fav" @click="addLike">
             <img src="~src/assets/zixun_dianzan_sel@2x.png" alt="">16
         </div>
         <div class="comment">
-            <a v-link="{path: './comments'}" href="javascript:;">
+            <a v-link="{path: './comments', query: {newsId: news.id}}" href="javascript:;">
                 <img src="~src/assets/zixun_pinglun@2x.png" alt="">评论
             </a>
         </div>
@@ -17,17 +17,48 @@
 </template>
 
 <script>
+import http from 'lib/http'
 import vArticle from 'components/Article'
+import {loading, toast} from 'vx/actions'
 export default {
   data () {
     return {
-        title: '七部委启动第三批电子商务示范城市申报工作',
-        meta: '8-11 09:00',
-        content: '很多内容离开就是来的快放假了空间路上看到减肥路上看到减肥离开就是来的快放假老师打开减肥离开就是来的快放假'
+        news: {},
+        newsId: 0
     }
   },
   components: {
     vArticle,
+  },
+  route: {
+    data(transition) {
+        let query = transition.to.query;
+        this.$set(newsId, query.id);
+        return http.getData(this, 'news/getNewsDetail', {
+            newsId: query.id
+        })
+        .then((detail) => {
+            this.$set('news', detail);
+        })
+    }
+  },
+  methods: {
+    addLike() {
+        let user = locache.get('STuserInfo');
+        http.handle(this, 'news/clickNewsLike', {
+            userId: user.userId,
+            newsId: this.newsId
+        })
+        .then(() => {
+            this.$set('hasLike', true);
+        })
+    }
+  }
+  vuex: {
+    actions: {
+        loading,
+        toast
+    }
   }
 };
 </script>
