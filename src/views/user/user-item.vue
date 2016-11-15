@@ -1,6 +1,6 @@
 <template>
 	<cell class="user-item" h="2rem">
-		<img src="../../assets/pic_a@2x.png">
+		<img :src="img">
 		<div>
 			<p class="fs-32 fs-black">{{name}}</p>
 			<slot></slot>
@@ -11,7 +11,8 @@
 	import Cell from 'components/Cell'
 	export default {
 		props: {
-			name: String
+			name: String,
+			img: String
 		},
 		components: {
 			Cell

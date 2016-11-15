@@ -2,9 +2,9 @@
     <page-title title="给领导打分"></page-title>
     <div class="page page-leader" v-if="!$loadingRouteData">
         <div class="leader bg-white bd">
-            <img src="../../assets/paihangbang_touxiang@3x.png">
-            <p class="fs-32 fs-gray-plus pt20">爽肤水</p>
-            <p class="fs-26 fs-gray pt10">似懂非懂说</p>
+            <img :src="userInfo.headImg|img">
+            <p class="fs-32 fs-gray-plus pt20">{{userInfo.name}}</p>
+            <p class="fs-26 fs-gray pt10">{{userInfo.department}}</p>
         </div>
         <div class="grid mt50">
             <btn @click="handleClick">给领导打分</btn>
@@ -18,10 +18,13 @@
     import http from 'lib/http'
     import locache from 'lib/locache'
     import { loading, toast } from 'vx/actions'
+    let userInfo = locache.get('STuserInfo');
     export default {
         data() {
             return {
-                userId: locache.get('STuserInfo').userId,
+                userInfo: userInfo,
+                userId: userInfo.userId,
+                superiorUserId: userInfo.superiorUserId,
                 list: {},
             }
         },
@@ -31,7 +34,17 @@
         },
         methods: {
             handleClick() {
-                this.$router.go({path: '/user/leaderScore', query: {superiorUserId: this.list.superiorUserId}});
+                return http.getData(this, 'mark/giveMark', {
+                    userId: this.userId,
+                    superiorUserId: this.superiorUserId
+                })
+                .then((list) => {
+                    if(!list.length) {
+                        this.toast('暂无可以打分的题目');
+                    }
+                    this.$router.go({path: '/user/leaderScore'});
+                });
+                
             }
         },
         route: {

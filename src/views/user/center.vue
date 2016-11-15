@@ -6,8 +6,8 @@
                 <img v-touch:tap="handleClick" :src="head || headImg || defaultImg">
                 <input id="head-img" type="file" @change="handleChange($event)">
             </div>
-            <p class="name fs-white pt20">李大仁</p>
-            <p class="positon fs-white pt10">商务经理</p>
+            <p class="name fs-white pt20">{{userInfo.name}}</p>
+            <p class="positon fs-white pt10">{{userInfo.rolename}}</p>
         </div>
         <div class="handle-list pt20">
             <cell class="bt" title="我的积分" :arrow="true" link="/user/integral">
@@ -25,7 +25,7 @@
             <cell title="自助申请加分" :arrow="true" link="/addIntegral">
                 <img slot="title" src="../../assets/wode_zzsqjf@3x.png">
             </cell>
-            <cell title="意见或者建议" :arrow="true">
+            <cell title="意见或者建议" :arrow="true" link="/user/suggest">
                 <img slot="title" src="../../assets/wode_yjhzjy@3x.png">
             </cell>
         </div>

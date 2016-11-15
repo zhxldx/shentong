@@ -58,9 +58,9 @@
                     userId: this.userInfo.userId,
                     welfareId: this.welfareId
                 })
-                .then((userInfo) => {
-                    this.toast('申请成功，扣除积分' + list.integral);
-                    this.userInfo.integral = this.userInfo.integral - list.integral;
+                .then(() => {
+                    this.toast('申请成功，扣除积分 ' + this.list.integral);
+                    this.userInfo.integral = this.userInfo.integral - this.list.integral;
                 });
             }
         },

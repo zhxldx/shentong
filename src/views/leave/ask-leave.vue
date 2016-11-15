@@ -1,5 +1,5 @@
 <template>
-    <page-title title="发布日报"></page-title>
+    <page-title title="请假"></page-title>
     <div class="page page-leave">
         <input id="j-start-time" type="date" v-model="startTime">
         <input id="j-end-time" type="date" v-model="endTime">
@@ -12,12 +12,12 @@
         title="请假理由"
         placeholder="请输入请假理由"
         :value.sync="reason"></text-card>
-        <cell class="apply-person mt20" h="2.66666667rem">
+        <!-- <cell class="apply-person mt20" h="2.66666667rem">
             <div slot="title">
                 审批人
                 <i></i>
             </div>
-        </cell>
+        </cell> -->
     </div>
     <div class="bottom bg-white bt">
         <btn @click="handleSubmit">提 交</btn>
@@ -33,18 +33,16 @@
     import http from 'lib/http'
     import { loading,toast } from 'vx/actions'
     import locache from 'lib/locache.js'
-    import { mask } from 'vx/actions'
+    let userInfo = locache.get('STuserInfo');
     export default {
         data() {
             return {
-                userId: locache.get('STuserInfo').userId,
+                userId: userInfo.userId,
+                superiorUserId: userInfo.superiorUserId,
                 startTime: '选择开始时间',
                 endTime: '选择结束时间',
                 reason: ''
             }
-        },
-        ready() {
-            console.log();
         },
         components: {
             PageTitle,
@@ -71,11 +69,11 @@
                 if(!this.verification()) return;
                 let param = [{
                     userId: this.userId,
+                    superiorUserId: this.superiorUserId,
                     starttime: this.startTime,
                     endtime: this.endTime,
                     days: this.dayNumber,
-                    reason: this.reason,
-                    superiorUserId: 1
+                    reason: this.reason
                 }];
                 // alert(JSON.stringify(param))
                 http.handle(this, 'leave/askLeave', {
