@@ -1,11 +1,11 @@
 <template>
 	<page-title title="我的履历"></page-title>
 	<div class="page page-user-resume" v-if="!$loadingRouteData">
-		<user-item :name="list.name">
-			<p class="fs-26 fs-gray pt10">部门：{{list.department}}</p>
+		<user-item :name="userInfo.name" :img="userInfo.headImg|img">
+			<p class="fs-26 fs-gray pt10">部门：{{userInfo.department}}</p>
 		</user-item>
 		<cell>
-			<span slot="title">在职时间：两年</span>
+			<span slot="title">在职时间：{{userInfo.year}} 年</span>
 		</cell>
 		<cell class="bg-gray">
 			<span slot="title" class="fs-gray">奖励</span>
@@ -34,7 +34,7 @@
 	export default {
 		data() {
 			return {
-				userId: locache.get('STuserInfo').userId,
+				userInfo: locache.get('STuserInfo'),
 				list: {}
 			}
 		},
@@ -47,7 +47,7 @@
 		route: {
 		    data() {
 		        return http.getData(this, 'user/getResume', {
-		            userId: this.userId,
+		            userId: this.userInfo.userId,
 		        })
 		        .then((list) => {
 		            this.$set('list', list);

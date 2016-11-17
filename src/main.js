@@ -23,13 +23,13 @@ Vue.use(Vue.lazyimg, {
     speed: 20,
 });
 
-Vue.config.devtools = true;
+// Vue.config.devtools = true;
 Vue.http.options.emulateJSON = true;
 FastClick.attach(document.body);
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
 
 const router = new Router({
-	history: true,
+	// history: true,
 	linkActiveClass: 'v-link-active'
 });
 routerConfig(router);

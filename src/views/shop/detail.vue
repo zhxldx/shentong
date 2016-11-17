@@ -114,6 +114,7 @@
                 justify-content: center;
                 align-items: center;
                 margin-right: .4rem; // 30px
+                background-color: #fff;
                 &:after {
                     content: attr(data-content);
                 }

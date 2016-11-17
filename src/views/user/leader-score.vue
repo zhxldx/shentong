@@ -1,6 +1,6 @@
 <template>
     <page-title title="给领导打分"></page-title>
-    <div class="page page-leader-score" v-if="!$loadingRouteData">
+    <div class="page page-leader-score" v-if="!$loadingRouteDat">
         <div class="leader-score bg-white bd">
             <div class="grid">
                 <p class="fs-34 fs-black mb20 mt20">{{currentData.question}}</p>
@@ -18,14 +18,17 @@
 <script>
     import PageTitle from 'components/PageTitle'
     import Btn from 'components/Btn'
+    import EmptyTips from 'components/EmptyTips'
 
     import http from 'lib/http'
     import locache from 'lib/locache'
     import { loading, toast } from 'vx/actions'
+    let userInfo = locache.get('STuserInfo');
     export default {
         data() {
             return {
-                userId: locache.get('STuserInfo').userId,
+                userId: userInfo.userId,
+                superiorUserId: userInfo.superiorUserId,
                 superiorUserId: 0,
                 btnText: '下一题',
                 list: [],
@@ -36,7 +39,8 @@
         },
         components: {
             PageTitle,
-            Btn
+            Btn,
+            EmptyTips
         },
         methods: {
             nextQuestion() {

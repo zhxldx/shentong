@@ -87,6 +87,12 @@ export default function(router) {
             },
             auth: true
         },
+        '/user/suggest':{           
+            component: function(resolve){
+                require(['./views/user/suggest'],resolve);
+            },
+            auth: true
+        },
 
 
         '/news':{           
