@@ -4,15 +4,15 @@
         <div class="comment">
             <div class="comment-head">
                 <div class="avatar">
-                    <img :src="comment.avatar">
+                    <img :src="comment.headImg">
                 </div>
                 <div class="meta-data">
-                    <span>{{comment.realName}}</span>
-                    <span>{{comment.addTime}}</span>
+                    <span>{{comment.username}}</span>
+                    <span>{{comment.createtime}}</span>
                 </div>
             </div>
             <div class="comment-body">
-                {{comment.comment}}
+                {{comment.content}}
             </div>
         </div>
     </li>
@@ -28,13 +28,15 @@ import http from 'lib/http'
 import {loading, toast} from 'vx/actions'
 import avatar from 'assets/paihangbang_touxiang@2x.png'
 import vInput from 'components/Input'
+import locache from 'lib/locache.js'
 export default {
   data () {
     return {
         comments:[],
         value: '',
         page: 1,
-        newsId:0
+        newsId:0,
+        imgHost: http.imgHost
     };
   },
   components: {
@@ -50,26 +52,34 @@ export default {
             page: 1
         })
         .then((comments) => {
+            for(let i in comments) {
+                comments[i].headImg = http.imgHost + comments[i].headImg;
+            }
             this.$set('comments', comments)
         })
     }
   },
   methods: {
     addComment() {
-        let c = this.value;
         let user = locache.get('STuserInfo');
+        console.log(JSON.stringify(user));
         let comment = {
             userId: user.userId,
-            headImg: user.headImg,
-            newsId: this.$get('newsId'),
-            content: c
+            headImg: '/sdj.jpg',//user.headImg,
+            newsId: this.newsId,
+            content: this.value
         }
         http.handle(this, 'news/comment', {
-            newsComments: comment
+            newsComments: '[' + JSON.stringify(comment) + ']'
         })
-        .then(() => {
-            // reload
+        .then((data) => {
+            let date = new Date();
+            comment.username = user.name
+            comment.createtime = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours() + ':' + date.getMiniutes() + ':' + date.getSeconds()
+            comment.content = this.value
+            comment.headImg = '/sdj.jpg'
             this.comments.push( comment )
+            this.$emit();  // 刷新数据修改后的页面
         })
     }
   },
@@ -85,6 +95,7 @@ export default {
 <style lang="less">
 @import '~src/styles/mixin.less';
 .comments {
+    padding-bottom: 1.30666667rem;
     li {
         background-color: #fefefe;
         padding: .48rem .4rem; // 36px 30px

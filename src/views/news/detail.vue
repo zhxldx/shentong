@@ -6,7 +6,7 @@
     </v-article>
     <div class="btn-container">
         <div class="fav" @click="addLike">
-            <img src="~src/assets/zixun_dianzan_sel@2x.png" alt="">16
+            <img :src="likedImg" alt="">{{news.likenums}}
         </div>
         <div class="comment">
             <a v-link="{path: './comments', query: {newsId: news.id}}" href="javascript:;">
@@ -20,11 +20,22 @@
 import http from 'lib/http'
 import vArticle from 'components/Article'
 import {loading, toast} from 'vx/actions'
+import locache from 'lib/locache.js'
 export default {
   data () {
     return {
         news: {},
-        newsId: 0
+        newsId: 0,
+        liked: null
+    }
+  },
+  computed: {
+    likedImg: function() {
+        let l = this.liked ? 'sel' : 'nor';
+        return '../assets/zixun_dianzan_'+l+'@3x.png';
+    },
+    user: function() {
+        return locache.get('STuserInfo');
     }
   },
   components: {
@@ -33,27 +44,32 @@ export default {
   route: {
     data(transition) {
         let query = transition.to.query;
-        this.$set(newsId, query.id);
+        this.$set('newsId', query.id);
         return http.getData(this, 'news/getNewsDetail', {
-            newsId: query.id
+            newsId: query.id,
+            userId: this.user.userId
         })
         .then((detail) => {
+            this.$set('liked', detail.hasLike === 0);
             this.$set('news', detail);
         })
     }
   },
   methods: {
     addLike() {
-        let user = locache.get('STuserInfo');
+        const user = this.user;
         http.handle(this, 'news/clickNewsLike', {
-            userId: user.userId,
-            newsId: this.newsId
+            newsLikes: [{
+                userId: user.userId,
+                newsId: this.newsId
+            }
+            ]
         })
         .then(() => {
-            this.$set('hasLike', true);
+            this.$set('liked', 'sel');
         })
     }
-  }
+  },
   vuex: {
     actions: {
         loading,
