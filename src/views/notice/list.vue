@@ -44,9 +44,6 @@ export default {
     }
   },
   methods: {
-    toDetail(link) {
-        this.$router.go(link);
-    },
     loadMore() {
         http.loadMore(this, 'notice/getNotices',{
             page: this.page + 1

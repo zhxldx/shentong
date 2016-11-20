@@ -1,15 +1,14 @@
 <template>
-    <div class="page"
+<div class="page"
     infinite-scroll-distance="100" 
     infinite-scroll-immediate-check="false"
     infinite-scroll-disabled="loadMoreBusy" 
     v-infinite-scroll="loadMore()">
-        <div class="l-cell grid" v-for="item in 10">
-            <img  src="../../assets/pic@2x.png" alt="">
-            <div class="l-text">
-                <p class="l-title">七部委启动第三批电子商务示范城市</p>
-                <div class="l-time">8-11 09:00</div>
-            </div>
+    <div class="l-cell grid" v-for="item of list" v-link="{path: '/news/detail', query: {id: item.id}}">
+        <img :src="item.listImg" alt="">
+        <div class="l-text">
+            <p class="l-title">{{item.title}}</p>
+            <div class="l-time">{{item.createtime}}</div>
         </div>
     </div>
 </template>
@@ -50,14 +49,17 @@ export default {
   },
   route: {
       data() {
-          return http.getData(this, 'message/getMessage', {
-              userId: 1,
-              page: 1
-          })
-          .then((list) => {
-              this.$set('list', list);
-          });
-      }
+        return http.getData(this, 'news/getNews', {
+            page: 1
+        })
+        .then((list) => {
+            list.forEach((news)=>{
+                news.listImg = http.imgHost + news.listImg;
+                return news;
+            })
+            this.$set('list', list)
+        })
+    }
   },
   vuex: {
       actions: {
