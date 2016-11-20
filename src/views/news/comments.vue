@@ -79,7 +79,7 @@ export default {
             comment.content = this.value
             comment.headImg = '/sdj.jpg'
             this.comments.push( comment )
-            this.$emit();  // 刷新数据修改后的页面
+            this.$set('comments', [])
         })
     }
   },

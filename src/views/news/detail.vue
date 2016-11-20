@@ -5,7 +5,7 @@
         :content="news.content">
     </v-article>
     <div class="btn-container">
-        <div class="fav" @click="addLike">
+        <div class="fav" @click="changeLike">
             <img :src="likedImg" alt="">{{news.likenums}}
         </div>
         <div class="comment">
@@ -56,17 +56,14 @@ export default {
     }
   },
   methods: {
-    addLike() {
+    changeLike() {
         const user = this.user;
         http.handle(this, 'news/clickNewsLike', {
-            newsLikes: [{
-                userId: user.userId,
-                newsId: this.newsId
-            }
-            ]
+            newsLikes: '['+JSON.stringify({userId: user.userId,newsId: this.newsId})+']',
+            hasLike: (!this.liked)+0
         })
-        .then(() => {
-            this.$set('liked', 'sel');
+        .then((data) => {
+            this.$set('liked', !this.liked);
         })
     }
   },
